@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  homunculus:
+    image: ghcr.io/anthropics/anthropic-quickstarts:computer-use-demo-latest
+    container_name: homunculus-vm
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - WIDTH=1920
+      - HEIGHT=1080
+      - DISPLAY=:1
+    volumes:
+      - ./data:/home/computeruse/persistent
+      - ./logs:/home/computeruse/logs
+      - ./scripts:/home/computeruse/scripts
+      - ./web:/var/www/html
+    ports:
+      - "80:80"       # Main web server
+      - "443:443"     # HTTPS
+      - "5900:5900"   # VNC
+      - "6080:6080"   # noVNC web client
+      - "7681:7681"   # ttyd terminal streaming
+      - "8080:8080"   # Chat + Desktop view
+      - "8501:8501"   # Streamlit chat
+      - "3000:3000"   # API server
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+        reservations:
+          memory: 4G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
