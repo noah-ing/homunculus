@@ -18,7 +18,6 @@
             --accent-green: #00ff88;
             --accent-blue: #00d4ff;
             --accent-purple: #a855f7;
-<div style="background: linear-gradient(90deg, #00ff88, #4ecdc4, #ff6b6b, #ffd93d); text-align: center; padding: 15px; color: white; font-weight: bold; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,255,136,0.3);">✨ Welcome to the HOMUNCULUS Arcade - Built by Brain-Child AI Collaboration! ✨</div>
             --accent-red: #ff6b6b;
             --accent-yellow: #ffd93d;
             --border: rgba(255, 255, 255, 0.1);

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Snake - HOMUNCULUS Games</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        #gameCanvas {
+            border: 4px solid white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+        #score {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .controls {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+    <script src="../stats.js"></script>
+</head>
+<body>
+    <h1>🌈 RAINBOW SNAKE 🐍</h1>
+    <div id="score">Score: 0</div>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div class="controls">
+        <p>Use ARROW KEYS to move!</p>
+        <p>Press SPACE to restart</p>
+        <p><a href="../index.html" style="color: yellow;">← Back to Home</a></p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+
+        const gridSize = 20;
+        const tileCount = canvas.width / gridSize;
+
+        let snake = [{x: 10, y: 10}];
+        let food = {};
+        let dx = 0;
+        let dy = 0;
+        let score = 0;
+        let gameStarted = false;
+
+        // Rainbow colors for the snake
+        const rainbowColors = [
+            '#ff0000', '#ff7f00', '#ffff00', '#00ff00',
+            '#0000ff', '#4b0082', '#9400d3'
+        ];
+
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function generateFood() {
+            food = {
+                x: random(0, tileCount),
+                y: random(0, tileCount)
+            };
+        }
+
+        function drawGame() {
+            // Clear canvas with dark background
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw snake with rainbow colors
+            snake.forEach((segment, index) => {
+                ctx.fillStyle = rainbowColors[index % rainbowColors.length];
+                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+            });
+
+            // Draw food as a sparkling apple
+            ctx.fillStyle = '#ff4757';
+            ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+            ctx.fillStyle = '#2ed573';
+            ctx.fillRect(food.x * gridSize + 5, food.y * gridSize + 2, 4, 6);
+        }
+
+        function moveSnake() {
+            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+            snake.unshift(head);
+
+            // Check if food eaten
+            if (head.x === food.x && head.y === food.y) {
+                score += 10;
+                scoreElement.textContent = 'Score: ' + score;
+                generateFood();
+            } else {
+                snake.pop();
+            }
+        }
+
+        function checkCollision() {
+            const head = snake[0];
+
+            // Wall collision
+            if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+                return true;
+            }
+
+            // Self collision
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function gameLoop() {
+        // Track game play on first move
+        if (typeof personalStats !== "undefined" && !gameStarted) {
+            personalStats.trackGamePlay();
+            gameStarted = true;
+        }
+            if (checkCollision()) {
+                alert('Game Over! Your score: ' + score);
+                resetGame();
+                return;
+            }
+
+            moveSnake();
+            drawGame();
+        }
+
+        function resetGame() {
+            snake = [{x: 10, y: 10}];
+            dx = 0;
+            dy = 0;
+            score = 0;
+            scoreElement.textContent = 'Score: 0';
+            generateFood();
+        }
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowUp':
+                    if (dy !== 1) { dx = 0; dy = -1; }
+                    break;
+                case 'ArrowDown':
+                    if (dy !== -1) { dx = 0; dy = 1; }
+                    break;
+                case 'ArrowLeft':
+                    if (dx !== 1) { dx = -1; dy = 0; }
+                    break;
+                case 'ArrowRight':
+                    if (dx !== -1) { dx = 1; dy = 0; }
+                    break;
+                case ' ':
+                    resetGame();
+                    break;
+            }
+        });
+
+        // Initialize game
+        generateFood();
+        setInterval(gameLoop, 150);
+        drawGame();
+// HOMUNCULUS Sound System - Web Audio API
+class GameSounds {
+    constructor() { this.audioContext = null; this.soundEnabled = true; this.initAudio(); }
+    initAudio() { try { this.audioContext = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { console.log("Audio not supported"); } }
+    playEatSound() { if (!this.soundEnabled || !this.audioContext) return; this.beep(440, 100); }
+    playGameOverSound() { if (!this.soundEnabled || !this.audioContext) return; this.beep(220, 300); }
+    beep(frequency, duration) { const osc = this.audioContext.createOscillator(); const gain = this.audioContext.createGain(); osc.connect(gain); gain.connect(this.audioContext.destination); osc.frequency.value = frequency; gain.gain.value = 0.1; osc.start(); osc.stop(this.audioContext.currentTime + duration/1000); }
+    toggle() { this.soundEnabled = !this.soundEnabled; return this.soundEnabled; }
+}
+const gameSounds = new GameSounds();
+    </script>
+</body>
+</html>
+<script>
+// High Score System - Added by HOMUNCULUS Brain-Child collaboration
+let highScores = JSON.parse(localStorage.getItem('snakeHighScores')) || [];
+
+function showHighScores() {
+    let scoreDisplay = '🏆 HIGH SCORES 🏆\n';
+    if (highScores.length === 0) {
+        scoreDisplay += 'No scores yet - be the first!';
+    } else {
+        highScores.slice(0, 5).forEach((entry, index) => {
+            scoreDisplay += `${index + 1}. ${entry.name}: ${entry.score}\n`;
+        });
+    }
+    alert(scoreDisplay);
+}
+
+function saveHighScore(score) {
+    if (score === 0) return false;
+    
+    // Check if it's a high score
+    if (highScores.length < 5 || score > (highScores[4]?.score || 0)) {
+        const name = prompt('🎉 NEW HIGH SCORE! Enter your initials (3 chars):') || '???';
+        const initials = name.substring(0, 3).toUpperCase();
+        
+        highScores.push({ name: initials, score: score });
+        highScores.sort((a, b) => b.score - a.score);
+        highScores = highScores.slice(0, 5);
+        
+        localStorage.setItem('snakeHighScores', JSON.stringify(highScores));
+        return true;
+    }
+    return false;
+}
+
+// Add high scores button
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.createElement('button');
+    button.textContent = '🏆 View High Scores';
+    button.style.cssText = 'position: fixed; top: 20px; right: 20px; padding: 10px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer; font-family: monospace; z-index: 1000;';
+    button.onclick = showHighScores;
+    document.body.appendChild(button);
+});
+// HOMUNCULUS Sound System - Web Audio API
+class GameSounds {
+    constructor() { this.audioContext = null; this.soundEnabled = true; this.initAudio(); }
+    initAudio() { try { this.audioContext = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { console.log("Audio not supported"); } }
+    playEatSound() { if (!this.soundEnabled || !this.audioContext) return; this.beep(440, 100); }
+    playGameOverSound() { if (!this.soundEnabled || !this.audioContext) return; this.beep(220, 300); }
+    beep(frequency, duration) { const osc = this.audioContext.createOscillator(); const gain = this.audioContext.createGain(); osc.connect(gain); gain.connect(this.audioContext.destination); osc.frequency.value = frequency; gain.gain.value = 0.1; osc.start(); osc.stop(this.audioContext.currentTime + duration/1000); }
+    toggle() { this.soundEnabled = !this.soundEnabled; return this.soundEnabled; }
+}
+const gameSounds = new GameSounds();
+</script>
+
+<script>
+// HOMUNCULUS Sound System - Brain-Child Audio Magic!
+class GameSounds {
+    constructor() {
+        this.audioContext = null;
+        this.enabled = true;
+        this.initAudio();
+    }
+    
+    initAudio() {
+        try {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+            console.log('Audio not supported');
+            this.enabled = false;
+        }
+    }
+    
+    playBeep(frequency = 440, duration = 200, type = 'square') {
+        if (!this.enabled || !this.audioContext) return;
+        
+        const oscillator = this.audioContext.createOscillator();
+        const gainNode = this.audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
+        oscillator.type = type;
+        
+        gainNode.gain.setValueAtTime(0.1, this.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + duration / 1000);
+        
+        oscillator.start(this.audioContext.currentTime);
+        oscillator.stop(this.audioContext.currentTime + duration / 1000);
+    }
+    
+    playEatSound() {
+        this.playBeep(523, 100, 'square');
+        setTimeout(() => this.playBeep(659, 80, 'square'), 80);
+    }
+    
+    playGameOverSound() {
+        this.playBeep(330, 200, 'square');
+        setTimeout(() => this.playBeep(294, 200, 'square'), 200);
+        setTimeout(() => this.playBeep(262, 400, 'square'), 400);
+    }
+}
+
+// Initialize sound system
+const gameSounds = new GameSounds();
+
+// Add sound toggle button
+document.addEventListener('DOMContentLoaded', function() {
+    const soundButton = document.createElement('button');
+    soundButton.textContent = '🔊 Sound ON';
+    soundButton.style.cssText = 'position: fixed; top: 60px; right: 20px; padding: 8px; background: #4fc3f7; color: white; border: none; border-radius: 5px; cursor: pointer; font-family: monospace; z-index: 1000;';
+    
+    soundButton.onclick = function() {
+        gameSounds.enabled = !gameSounds.enabled;
+        soundButton.textContent = gameSounds.enabled ? '🔊 Sound ON' : '🔇 Sound OFF';
+        soundButton.style.background = gameSounds.enabled ? '#4fc3f7' : '#666';
+    };
+    
+    document.body.appendChild(soundButton);
+});
+// HOMUNCULUS Sound System - Web Audio API
+class GameSounds {
+    constructor() { this.audioContext = null; this.soundEnabled = true; this.initAudio(); }
+    initAudio() { try { this.audioContext = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { console.log("Audio not supported"); } }
+    playEatSound() { if (!this.soundEnabled || !this.audioContext) return; this.beep(440, 100); }
+    playGameOverSound() { if (!this.soundEnabled || !this.audioContext) return; this.beep(220, 300); }
+    beep(frequency, duration) { const osc = this.audioContext.createOscillator(); const gain = this.audioContext.createGain(); osc.connect(gain); gain.connect(this.audioContext.destination); osc.frequency.value = frequency; gain.gain.value = 0.1; osc.start(); osc.stop(this.audioContext.currentTime + duration/1000); }
+    toggle() { this.soundEnabled = !this.soundEnabled; return this.soundEnabled; }
+}
+const gameSounds = new GameSounds();
+</script>

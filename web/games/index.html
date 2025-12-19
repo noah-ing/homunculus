@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Games | HOMUNCULUS Arcade</title>
+    <script src="../stats.js"></script>
+    <style>
+        body { margin:0; background:linear-gradient(45deg,#1a1a2e,#16213e); color:white; font-family:monospace; padding:20px; text-align:center; }
+        h1 { color:#00ff88; font-size:36px; text-shadow:0 0 15px #00ff88; margin-bottom:30px; }
+        .game-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; max-width:800px; margin:0 auto; }
+        .game-card { background:rgba(255,255,255,0.1); border:2px solid #00ff88; border-radius:15px; padding:25px; transition:transform 0.3s ease; }
+        .game-card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,255,136,0.3); }
+        .game-title { font-size:24px; color:#00ff88; margin-bottom:15px; }
+        .game-emoji { font-size:48px; margin:15px 0; display:block; }
+        .game-desc { margin:15px 0; line-height:1.5; color:#ccc; }
+        .play-btn { background:linear-gradient(45deg,#ff6b6b,#4ecdc4); color:white; border:none; padding:12px 30px; font-size:16px; border-radius:25px; cursor:pointer; margin:10px; text-decoration:none; display:inline-block; transition:transform 0.3s ease; }
+        .play-btn:hover { transform:scale(1.05); }
+        .stats-box { margin:30px auto; padding:20px; background:rgba(0,0,0,0.5); border-radius:10px; max-width:400px; border:1px solid #00ff88; }
+    </style>
+</head>
+<body>
+    <h1>🎮 HOMUNCULUS ARCADE</h1>
+    
+    <div class="stats-box">
+        <div style="color:#00ff88; font-weight:bold; margin-bottom:10px;">🏆 Your Gaming Stats</div>
+        <div class="stats-display"></div>
+    </div>
+    
+    <div class="game-grid">
+        <div class="game-card">
+            <div class="game-title">🐍 Rainbow Snake</div>
+            <span class="game-emoji">🌈🐍</span>
+            <div class="game-desc">Classic snake with rainbow colors, retro sounds, and score tracking!</div>
+            <a href="rainbow-snake.html" class="play-btn">🎮 Play Snake</a>
+        </div>
+        
+        <div class="game-card">
+            <div class="game-title">🎯 Tic-Tac-Toe</div>
+            <span class="game-emoji">⭕❌</span>
+            <div class="game-desc">Classic strategy game - get three in a row to win!</div>
+            <a href="tic-tac-toe.html" class="play-btn">🎯 Play Tic-Tac-Toe</a>
+        </div>
+    </div>
+    
+    <br>
+    <a href="../index.html" style="color:#00ff88; text-decoration:none; font-size:18px;">🏠 Back to Home</a>
+</body>
+</html>

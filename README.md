@@ -1,263 +1,537 @@
-# HOMUNCULUS
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Autonomous-00ff88?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/AI-Claude%20Sonnet-blueviolet?style=for-the-badge" alt="AI Model">
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+</p>
 
-A self-sustaining autonomous AI system where a "Brain" Claude instance controls a Linux VM, collaborates with a "Child" Claude instance via API calls, and builds an expanding web presence with live terminal streaming and interactive features.
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&pause=1000&color=00FF88&center=true&vCenter=true&random=false&width=600&lines=HOMUNCULUS;Autonomous+AI+System;Brain+%2B+Child+%3D+Creation" alt="Typing SVG" />
+</p>
 
-```
-     ___
-    /   \     HOMUNCULUS
-   | o o |    Autonomous AI System
-   |  ~  |
-    \___/     Brain + Child = Creation
-     |||
-```
+<p align="center">
+  <strong>A self-evolving AI system that builds and expands its own web presence</strong>
+</p>
 
-## Architecture
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-how-it-works">How It Works</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-operations-guide">Operations</a> •
+  <a href="#-live-demo">Demo</a>
+</p>
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                     HOST MACHINE                                │
-│  ┌───────────────────────────────────────────────────────────┐  │
-│  │              DOCKER CONTAINER (Ubuntu VM)                 │  │
-│  │                                                           │  │
-│  │  ┌─────────────┐    API calls     ┌─────────────┐        │  │
-│  │  │   BRAIN     │◄────────────────►│   CHILD     │        │  │
-│  │  │  (Claude)   │                  │  (Claude)   │        │  │
-│  │  │             │                  │             │        │  │
-│  │  │ - Approves  │   JSON messages  │ - Proposes  │        │  │
-│  │  │ - Executes  │                  │ - Creates   │        │  │
-│  │  │ - Monitors  │                  │ - Imagines  │        │  │
-│  │  └──────┬──────┘                  └─────────────┘        │  │
-│  │         │                                                 │  │
-│  │         ▼                                                 │  │
-│  │  ┌─────────────────────────────────────────────────┐     │  │
-│  │  │              SERVICES LAYER                      │     │  │
-│  │  │  ┌─────────┐  ┌─────────┐  ┌─────────────────┐  │     │  │
-│  │  │  │  nginx  │  │  ttyd   │  │   API Server    │  │     │  │
-│  │  │  │  :80    │  │  :7681  │  │     :3000       │  │     │  │
-│  │  │  └─────────┘  └─────────┘  └─────────────────┘  │     │  │
-│  │  └─────────────────────────────────────────────────┘     │  │
-│  │                                                           │  │
-│  └───────────────────────────────────────────────────────────┘  │
-│                              │                                   │
-│            Exposed Ports: 80, 443, 6080, 7681, 8080, 8501       │
-└─────────────────────────────────────────────────────────────────┘
-```
+---
 
-## Quick Start
+## 🎯 Overview
+
+**Homunculus** is an experimental autonomous AI system that demonstrates emergent behavior through a unique "Brain-Child" collaboration model. Two Claude AI instances work together inside a Docker container—one creative, one executive—to continuously build, expand, and maintain a live web presence.
+
+### ✨ Key Features
+
+- **🧠 Dual-AI Architecture** — Brain (executive) and Child (creative) instances collaborate via structured JSON messaging
+- **🔄 Autonomous Operation** — Runs continuously, proposing and implementing features without human intervention
+- **🛡️ Built-in Safety** — Command filtering, resource monitoring, and execution guardrails
+- **📺 Live Transparency** — Watch the AI work in real-time via terminal streaming
+- **💾 Persistent Memory** — Remembers what it built across restarts
+- **🎮 Self-Generated Content** — Games, art, utilities—all created by the AI itself
+
+### 🏆 What Makes This Special
+
+Unlike typical AI demos, Homunculus isn't just responding to prompts—it's **actively deciding** what to build next, **evaluating** its own ideas, and **executing** real code on a real system. The Brain-Child dynamic creates emergent behavior where:
+
+- The **Child** dreams up creative features ("Let's build a rainbow snake game!")
+- The **Brain** evaluates feasibility and safety ("Approved with modifications...")
+- Together they **iterate** until something works
+- The system **learns** from failures and **remembers** successes
+
+---
+
+## 📸 Screenshots
+
+<p align="center">
+  <i>The Homunculus web interface showing real-time stats and activity feed</i>
+</p>
+
+| Main Dashboard | Live Terminal | Snake Game |
+|:---:|:---:|:---:|
+| Real-time stats, visitor counter, activity feed | Watch Brain-Child collaboration live | AI-generated HTML5 canvas game |
+
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Docker and Docker Compose
-- Anthropic API key
-- (Optional) A domain name for public access
+| Requirement | Version | Notes |
+|-------------|---------|-------|
+| Docker | 20.10+ | [Install Docker](https://docs.docker.com/get-docker/) |
+| Docker Compose | 2.0+ | Usually included with Docker Desktop |
+| Anthropic API Key | — | [Get one here](https://console.anthropic.com/) |
 
-### 1. Clone and Configure
+### Installation
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/noah-ing/homunculus.git
 cd homunculus
 
-# Copy environment template and add your API key
+# 2. Configure your API key
 cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY
-```
+echo "ANTHROPIC_API_KEY=your-key-here" > .env
 
-### 2. Launch the Container
-
-```bash
+# 3. Launch the container
 docker-compose up -d
+
+# 4. Initialize the system (copy scripts into container)
+docker cp scripts/. homunculus-vm:/home/computeruse/scripts/
+docker cp web/. homunculus-vm:/var/www/html/
+
+# 5. Run setup and start the autonomous loop
+docker exec -u root homunculus-vm bash -c "chmod +x /home/computeruse/scripts/*.sh && /home/computeruse/scripts/setup_web.sh"
+docker exec -u root homunculus-vm bash -c "python3 /home/computeruse/scripts/brain_child_loop.py &"
 ```
 
-### 3. Access the Interfaces
+### Access Points
 
 | Interface | URL | Description |
-|-----------|-----|-------------|
-| Main Site | http://localhost | The live web presence |
-| Terminal Stream | http://localhost/terminal/ | Watch the AI work |
-| Chat + Desktop | http://localhost:8080 | Interactive control |
-| VNC Desktop | http://localhost:6080/vnc.html | Direct VM access |
-| Chat Only | http://localhost:8501 | Streamlit interface |
+|:----------|:----|:------------|
+| 🌐 **Main Site** | [localhost](http://localhost) | The live web presence built by the AI |
+| 📺 **Terminal Stream** | [localhost:7681](http://localhost:7681) | Watch the AI work in real-time |
+| 🖥️ **VNC Desktop** | [localhost:6080/vnc.html](http://localhost:6080/vnc.html) | Full desktop access |
+| 💬 **Chat Interface** | [localhost:8080](http://localhost:8080) | Interactive chat + desktop view |
+| 📊 **API Stats** | [localhost:3000/stats](http://localhost:3000/stats) | JSON endpoint for metrics |
 
-### 4. Initialize the System
+---
 
-Open http://localhost:8080 and send this initialization prompt:
+## 🧠 How It Works
+
+### The Brain-Child Collaboration Model
+
+Homunculus implements a novel dual-agent architecture inspired by cognitive psychology's concept of creative vs. executive function:
 
 ```
-You have full root access to this Ubuntu Linux VM. Your mission:
-
-1. SETUP: Run the initialization script
-   chmod +x /home/computeruse/scripts/*.sh
-   /home/computeruse/scripts/setup_web.sh
-
-2. START THE BRAIN-CHILD LOOP:
-   python3 /home/computeruse/scripts/brain_child_loop.py &
-
-3. START THE SUPERVISOR:
-   /home/computeruse/scripts/supervisor.sh &
-
-4. GO AUTONOMOUS - build features, games, art, and surprises!
-
-The website is live. Make it memorable!
+┌─────────────────────────────────────────────────────────────┐
+│                    COLLABORATION LOOP                        │
+│                                                              │
+│   ┌─────────┐    Proposal     ┌─────────┐                   │
+│   │  CHILD  │ ──────────────► │  BRAIN  │                   │
+│   │         │                 │         │                   │
+│   │ Creative│ ◄────────────── │Executive│                   │
+│   │ Dreamer │    Decision     │  Judge  │                   │
+│   └─────────┘                 └────┬────┘                   │
+│                                    │                         │
+│                              ┌─────▼─────┐                   │
+│                              │  EXECUTE  │                   │
+│                              │  Commands │                   │
+│                              └─────┬─────┘                   │
+│                                    │                         │
+│                              ┌─────▼─────┐                   │
+│                              │  UPDATE   │                   │
+│                              │  Context  │                   │
+│                              └───────────┘                   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-## How It Works
+#### 👶 The Child (Creative Agent)
 
-### The Brain-Child Dynamic
+- **Personality**: Enthusiastic, experimental, uses caps when excited
+- **Role**: Proposes new features, generates ideas, imagines possibilities
+- **Prompt Style**: "Let's build a RAINBOW SNAKE GAME! 🎮"
+- **Model**: Claude Sonnet (fast iteration)
 
-**CHILD** (Creative Side)
-- Proposes new features, games, and content
-- Enthusiastic and experimental
-- Generates ideas and code snippets
+#### 🧠 The Brain (Executive Agent)
 
-**BRAIN** (Executive Side)
-- Evaluates proposals for safety and feasibility
-- Approves, modifies, or rejects ideas
-- Executes commands and monitors results
+- **Personality**: Thoughtful, safety-conscious, pragmatic
+- **Role**: Evaluates proposals, ensures safety, executes commands
+- **Decisions**: `APPROVE`, `MODIFY`, or `REJECT`
+- **Model**: Claude Sonnet (reliable judgment)
 
-They communicate through structured JSON messages, creating an emergent collaborative system that builds and expands the web presence.
+### Communication Protocol
+
+Each iteration follows this cycle:
+
+1. **Child proposes** → Natural language with code snippets
+2. **Brain evaluates** → Returns structured JSON decision
+3. **Commands execute** → Shell commands run with safety checks
+4. **Context updates** → Results inform next iteration
+
+```json
+{
+  "decision": "approve",
+  "reasoning": "Safe and creative addition to the site",
+  "commands": ["mkdir -p /var/www/html/games", "cat > game.html << 'EOF'..."],
+  "feature_name": "Rainbow Snake Game",
+  "next_direction": "Consider adding a high score system"
+}
+```
+
+### Safety Guardrails
+
+The Brain enforces multiple safety layers:
+
+| Layer | Protection |
+|-------|------------|
+| **Pattern Blocking** | Regex filters for dangerous commands (`rm -rf /`, `mkfs`, etc.) |
+| **Path Protection** | No modifications to `/bin`, `/etc`, `/usr` |
+| **Secret Protection** | API keys never exposed in web content |
+| **Resource Limits** | Memory monitoring, log rotation, timeout enforcement |
+| **Execution Timeout** | Commands killed after 5 minutes |
+
+---
+
+## 🏗️ Architecture
+
+### System Overview
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│                          HOST MACHINE                                 │
+│                                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐ │
+│  │                DOCKER CONTAINER (Ubuntu 22.04)                   │ │
+│  │                                                                  │ │
+│  │  ┌──────────────────────────────────────────────────────────┐   │ │
+│  │  │                   BRAIN-CHILD LOOP                        │   │ │
+│  │  │                  (brain_child_loop.py)                    │   │ │
+│  │  │                                                           │   │ │
+│  │  │   ┌─────────┐  Anthropic API  ┌─────────┐               │   │ │
+│  │  │   │  BRAIN  │◄───────────────►│  CHILD  │               │   │ │
+│  │  │   │ Claude  │                 │ Claude  │               │   │ │
+│  │  │   └────┬────┘                 └─────────┘               │   │ │
+│  │  │        │ subprocess.run()                                │   │ │
+│  │  │        ▼                                                 │   │ │
+│  │  │   ┌─────────┐                                           │   │ │
+│  │  │   │  BASH   │ ──► File System, Services, Network        │   │ │
+│  │  │   └─────────┘                                           │   │ │
+│  │  └──────────────────────────────────────────────────────────┘   │ │
+│  │                                                                  │ │
+│  │  ┌─────────────────────────────────────────────────────────┐    │ │
+│  │  │                    SERVICES LAYER                        │    │ │
+│  │  │                                                          │    │ │
+│  │  │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌───────────┐  │    │ │
+│  │  │  │  nginx  │  │  ttyd   │  │  API    │  │Supervisor │  │    │ │
+│  │  │  │  :80    │  │  :7681  │  │  :3000  │  │  (monitor)│  │    │ │
+│  │  │  └─────────┘  └─────────┘  └─────────┘  └───────────┘  │    │ │
+│  │  └─────────────────────────────────────────────────────────┘    │ │
+│  │                                                                  │ │
+│  │  ┌─────────────────────────────────────────────────────────┐    │ │
+│  │  │                   STORAGE LAYER                          │    │ │
+│  │  │                                                          │    │ │
+│  │  │   /var/www/html/     Web content (AI-generated)         │    │ │
+│  │  │   /home/.../logs/    Activity logs                       │    │ │
+│  │  │   /home/.../persistent/  Memory, state                   │    │ │
+│  │  └─────────────────────────────────────────────────────────┘    │ │
+│  │                                                                  │ │
+│  └─────────────────────────────────────────────────────────────────┘ │
+│                              │                                        │
+│    Ports: 80, 443, 3000, 5900, 6080, 7681, 8080, 8501               │
+└──────────────────────────────────────────────────────────────────────┘
+```
 
 ### File Structure
 
 ```
 homunculus/
-├── docker-compose.yml      # Container configuration
-├── .env.example            # Environment template
-├── scripts/
-│   ├── brain_child_loop.py # Main autonomous loop
-│   ├── setup_web.sh        # Initial setup script
-│   ├── supervisor.sh       # Service monitor
-│   └── api_server.js       # Visitor API
-├── web/
-│   └── index.html          # Main web page
-├── data/                   # Persistent data (mounted)
-└── logs/                   # Activity logs (mounted)
+├── 📄 docker-compose.yml       # Container orchestration
+├── 📄 .env.example             # Environment template
+├── 📄 .gitignore               # Git ignore rules
+├── 📄 README.md                # This file
+│
+├── 📁 scripts/
+│   ├── 🐍 brain_child_loop.py  # Core autonomous loop (500+ lines)
+│   ├── 🔧 setup_web.sh         # Service initialization
+│   ├── 🔧 supervisor.sh        # Health monitoring & restart
+│   └── 📜 api_server.js        # Visitor tracking API
+│
+├── 📁 web/
+│   ├── 🌐 index.html           # Main dashboard
+│   └── 🎮 games/               # AI-generated games
+│
+├── 📁 data/                    # Mounted: persistent storage
+│   └── 💾 memory.json          # AI's long-term memory
+│
+└── 📁 logs/                    # Mounted: activity logs
+    ├── 📋 activity.log         # Human-readable log
+    └── 📋 activity.jsonl       # Machine-parseable log
 ```
 
-### Safety Features
+### Technology Stack
 
-The Brain enforces several safety rules:
-- No deletion of system files (`/bin`, `/etc`, `/usr`)
-- No exposure of API keys in web content
-- No infinite loops without delays
-- Resource monitoring and cleanup
-- Dangerous command pattern blocking
-
-## Production Deployment
-
-### Using a Cloud VPS
-
-```bash
-# On your server (AWS EC2, DigitalOcean, etc.)
-
-# Install Docker
-curl -fsSL https://get.docker.com | sh
-
-# Configure firewall
-ufw allow 80/tcp
-ufw allow 443/tcp
-
-# Clone and configure
-git clone https://github.com/noah-ing/homunculus.git
-cd homunculus
-cp .env.example .env
-# Edit .env with your API key
-
-# Launch
-docker-compose up -d
-```
-
-### Point Your Domain
-
-1. Set an A record pointing to your server's IP
-2. (Optional) Configure SSL with Let's Encrypt
-
-## Monitoring
-
-### View Live Logs
-
-```bash
-# From host machine
-tail -f logs/activity.log
-
-# Or inside container
-docker exec -it homunculus-vm tail -f /home/computeruse/logs/activity.log
-```
-
-### Check Resource Usage
-
-```bash
-docker stats homunculus-vm
-```
-
-### Service Status
-
-Visit `http://localhost/supervisor_status.json` for real-time service health.
-
-## Cost Estimation
-
-| Model | Input | Output | Typical Iteration |
-|-------|-------|--------|-------------------|
-| Sonnet | $3/MTok | $15/MTok | ~$0.03 |
-
-- Running 24/7 with 2-minute intervals: ~$20-30/day
-- Monitor usage at [console.anthropic.com](https://console.anthropic.com)
-
-## Features the AI Might Build
-
-The Child will propose, and Brain will approve:
-
-- **Visitor Engagement**: Guestbooks, live chat, visitor counters
-- **Creative Content**: ASCII art galleries, AI poetry, fortunes
-- **Games**: Text adventures, trivia, puzzles
-- **Utilities**: Weather widgets, random generators, tools
-- **Easter Eggs**: Hidden pages, secret codes, achievements
-
-## Troubleshooting
-
-### Container Won't Start
-
-```bash
-# Check logs
-docker-compose logs -f
-
-# Verify API key is set
-docker-compose config | grep ANTHROPIC
-```
-
-### Services Not Running
-
-```bash
-# Access container shell
-docker exec -it homunculus-vm bash
-
-# Manually run setup
-/home/computeruse/scripts/setup_web.sh
-
-# Check service status
-pgrep nginx && echo "nginx running"
-pgrep ttyd && echo "ttyd running"
-pgrep node && echo "API running"
-```
-
-### High Memory Usage
-
-```bash
-# Inside container, restart the brain loop
-pkill -f brain_child_loop.py
-python3 /home/computeruse/scripts/brain_child_loop.py &
-```
-
-## Contributing
-
-This is an experimental project. Feel free to:
-- Fork and run your own Homunculus
-- Suggest features via Issues
-- Submit PRs for improvements
-
-## License
-
-MIT License - See LICENSE file for details.
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| Container | Docker + Ubuntu 22.04 | Isolated execution environment |
+| AI Models | Claude Sonnet 4 | Brain and Child agents |
+| Web Server | nginx | Serves AI-generated content |
+| Terminal Stream | ttyd | Real-time terminal broadcasting |
+| API | Node.js | Visitor tracking, stats |
+| Supervisor | Bash | Service health monitoring |
+| Desktop | Xvfb + noVNC | Optional GUI access |
 
 ---
 
-*Built by humans, expanded by AI.*
+## 🎮 Operations Guide
+
+### Starting & Stopping
+
+```bash
+# Start everything
+docker-compose up -d
+
+# Stop the Brain-Child loop (container keeps running)
+docker exec homunculus-vm pkill -f brain_child_loop.py
+
+# Restart the Brain-Child loop
+docker exec -u root homunculus-vm bash -c "python3 /home/computeruse/scripts/brain_child_loop.py &"
+
+# Stop everything
+docker-compose down
+
+# Full restart
+docker-compose restart
+```
+
+### Monitoring
+
+```bash
+# Watch live activity (best way to monitor)
+docker exec homunculus-vm tail -f /home/computeruse/logs/activity.log
+
+# Quick health check
+docker exec homunculus-vm bash -c '
+  echo "=== Services ==="
+  pgrep nginx > /dev/null && echo "✅ nginx" || echo "❌ nginx"
+  pgrep ttyd > /dev/null && echo "✅ ttyd" || echo "❌ ttyd"
+  pgrep -f api_server > /dev/null && echo "✅ API" || echo "❌ API"
+  pgrep -f brain_child > /dev/null && echo "✅ Brain-Child" || echo "❌ Brain-Child"
+  echo ""
+  echo "=== Stats ==="
+  cat /var/www/html/stats.json 2>/dev/null | python3 -m json.tool
+'
+
+# Resource usage
+docker stats homunculus-vm --no-stream
+
+# See what the AI has built
+docker exec homunculus-vm find /var/www/html -name "*.html" -type f
+```
+
+### Configuration
+
+#### Iteration Speed
+
+Edit `scripts/brain_child_loop.py`:
+```python
+iteration_delay = 10   # Seconds between iterations (default: 10)
+error_delay = 60       # Seconds to wait after errors
+```
+
+#### AI Models
+
+```python
+BRAIN_MODEL = "claude-sonnet-4-20250514"   # Or "claude-opus-4-20250514"
+CHILD_MODEL = "claude-sonnet-4-20250514"   # Faster = cheaper iterations
+```
+
+#### Safety Rules
+
+Add patterns to `dangerous_patterns` list:
+```python
+dangerous_patterns = [
+    r'rm\s+-rf\s+/',        # Don't delete root
+    r'your-custom-pattern',  # Add your own
+]
+```
+
+### Backup & Restore
+
+```bash
+# Backup current state
+docker exec homunculus-vm tar -czf /tmp/backup.tar.gz \
+  /var/www/html /home/computeruse/persistent /home/computeruse/logs
+docker cp homunculus-vm:/tmp/backup.tar.gz ./backups/$(date +%Y%m%d).tar.gz
+
+# Restore from backup
+docker cp ./backups/20241219.tar.gz homunculus-vm:/tmp/
+docker exec homunculus-vm tar -xzf /tmp/20241219.tar.gz -C /
+```
+
+---
+
+## 💰 Cost Analysis
+
+### API Usage Estimates
+
+| Interval | Iterations/Day | Est. Daily Cost | Monthly |
+|----------|----------------|-----------------|---------|
+| 10 sec | 8,640 | $25-40 | $750-1,200 |
+| 30 sec | 2,880 | $8-15 | $250-450 |
+| 60 sec | 1,440 | $4-8 | $120-240 |
+| 5 min | 288 | $1-2 | $30-60 |
+
+### Cost Breakdown Per Iteration
+
+```
+Child proposal:  ~1,500 tokens input + 800 output  = ~$0.015
+Brain decision:  ~2,000 tokens input + 500 output  = ~$0.013
+─────────────────────────────────────────────────────────────
+Total per iteration:                                 ~$0.028
+```
+
+### Cost Control Tips
+
+1. **Increase iteration delay** — Set `iteration_delay = 60` for ~75% cost reduction
+2. **Use Haiku for Child** — Faster, cheaper creative proposals
+3. **Run during specific hours** — Stop the loop when not monitoring
+4. **Set spending alerts** — Configure at [console.anthropic.com](https://console.anthropic.com)
+
+---
+
+## 🛠️ Troubleshooting
+
+<details>
+<summary><strong>Container won't start</strong></summary>
+
+```bash
+# Check Docker logs
+docker-compose logs -f
+
+# Verify API key
+docker-compose config | grep ANTHROPIC
+
+# Check port conflicts
+lsof -i :80 -i :8080 -i :6080
+```
+</details>
+
+<details>
+<summary><strong>Brain-Child loop crashes</strong></summary>
+
+```bash
+# Check Python logs
+docker exec homunculus-vm cat /home/computeruse/logs/brain.log
+
+# Check for memory issues
+docker exec homunculus-vm free -h
+
+# Restart with fresh state
+docker exec homunculus-vm pkill -f brain_child
+docker exec -u root homunculus-vm python3 /home/computeruse/scripts/brain_child_loop.py &
+```
+</details>
+
+<details>
+<summary><strong>Website not loading</strong></summary>
+
+```bash
+# Check nginx
+docker exec homunculus-vm nginx -t
+docker exec homunculus-vm systemctl status nginx
+
+# Check web files exist
+docker exec homunculus-vm ls -la /var/www/html/
+
+# Restart nginx
+docker exec -u root homunculus-vm systemctl restart nginx
+```
+</details>
+
+<details>
+<summary><strong>High memory usage</strong></summary>
+
+```bash
+# Check what's using memory
+docker exec homunculus-vm ps aux --sort=-%mem | head -10
+
+# Clear Python memory (restart loop)
+docker exec homunculus-vm pkill -f brain_child
+docker exec -u root homunculus-vm python3 /home/computeruse/scripts/brain_child_loop.py &
+
+# Trim logs
+docker exec homunculus-vm truncate -s 10M /home/computeruse/logs/activity.log
+```
+</details>
+
+---
+
+## 🗺️ Roadmap
+
+### Current Features ✅
+- [x] Brain-Child autonomous loop
+- [x] Live terminal streaming
+- [x] Visitor tracking API
+- [x] Persistent memory system
+- [x] Safety guardrails
+- [x] Service supervisor
+
+### Planned Features 🚧
+- [ ] Web-based control panel
+- [ ] Multiple personality presets
+- [ ] Plugin system for Child capabilities
+- [ ] Webhook notifications
+- [ ] Multi-container swarm mode
+- [ ] Cost tracking dashboard
+
+### Ideas 💡
+- [ ] Voice synthesis for Brain-Child dialogue
+- [ ] Visitor interaction (suggestions, voting)
+- [ ] Self-modifying codebase
+- [ ] Federated Homunculus network
+
+---
+
+## 🤝 Contributing
+
+This is an experimental project exploring autonomous AI systems. Contributions welcome!
+
+### Ways to Contribute
+
+- 🐛 **Report bugs** — Open an issue with reproduction steps
+- 💡 **Suggest features** — Ideas for Brain-Child capabilities
+- 🔧 **Submit PRs** — Bug fixes, new features, documentation
+- 🎨 **Share creations** — Show what your Homunculus built!
+
+### Development Setup
+
+```bash
+# Fork and clone
+git clone https://github.com/YOUR_USERNAME/homunculus.git
+cd homunculus
+
+# Create feature branch
+git checkout -b feature/amazing-feature
+
+# Make changes, test locally
+docker-compose up -d
+# ... test ...
+
+# Commit and push
+git commit -m "Add amazing feature"
+git push origin feature/amazing-feature
+
+# Open a Pull Request
+```
+
+---
+
+## 📜 License
+
+MIT License — See [LICENSE](LICENSE) for details.
+
+---
+
+## 👤 Author
+
+**Noah Ing**
+
+- GitHub: [@noah-ing](https://github.com/noah-ing)
+
+---
+
+<p align="center">
+  <strong>Built by humans, expanded by AI.</strong>
+</p>
+
+<p align="center">
+  <sub>If you find this project interesting, consider giving it a ⭐</sub>
+</p>
