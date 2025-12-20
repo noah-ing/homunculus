@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 """
-Brain-Child Autonomous Loop System
-===================================
+Brain-Child Autonomous Loop System with EVOLUTION
+===================================================
 Brain: Approves, executes, monitors - the cautious, practical side
 Child: Proposes, suggests, creates - the creative, enthusiastic side
 
+NEW: Evolution System
+- AI learns from successes and failures
+- Skills develop and unlock over time
+- Personality emerges from behavior patterns
+- Generations mark major evolutionary milestones
+- Complexity increases as mastery grows
+
 Communication: Via shared files and structured JSON messages
 This creates an emergent collaborative AI system that builds and expands
-a live web presence autonomously.
+a live web presence autonomously - AND GETS BETTER OVER TIME.
 """
 
 import anthropic
@@ -19,6 +26,14 @@ import re
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
+
+# Import evolution system
+try:
+    from evolution import get_evolution, Evolution
+    EVOLUTION_ENABLED = True
+except ImportError:
+    EVOLUTION_ENABLED = False
+    print("Warning: Evolution system not available")
 
 # Configuration
 BRAIN_MODEL = "claude-sonnet-4-20250514"
@@ -89,7 +104,6 @@ class Memory:
             "moment": moment,
             "occurred_at": datetime.now().isoformat()
         })
-        # Keep only last 100 memorable moments
         self.data["memorable_moments"] = self.data["memorable_moments"][-100:]
         self.save()
 
@@ -108,7 +122,7 @@ class Message:
     def __init__(self, sender: str, content: str, msg_type: str = "proposal"):
         self.sender = sender
         self.content = content
-        self.msg_type = msg_type  # proposal, approval, execution_result, idea, reflection
+        self.msg_type = msg_type
         self.timestamp = datetime.now().isoformat()
 
     def to_dict(self) -> dict:
@@ -130,7 +144,6 @@ def log_activity(message: str, level: str = "INFO"):
     with open(log_file, "a") as f:
         f.write(log_entry + "\n")
 
-    # Also write to a JSON log for easier parsing
     json_log = LOGS_DIR / "activity.jsonl"
     with open(json_log, "a") as f:
         f.write(json.dumps({
@@ -140,23 +153,25 @@ def log_activity(message: str, level: str = "INFO"):
         }) + "\n")
 
 
-def execute_command(command: str, timeout: int = 300) -> tuple[bool, str]:
+def execute_command(command: str, timeout: int = 300, evolution: Optional[Evolution] = None) -> tuple[bool, str]:
     """Execute shell command safely with timeout and sanitization"""
 
     # Safety checks - prevent dangerous operations
     dangerous_patterns = [
-        r'rm\s+-rf\s+/',           # Don't delete root
-        r'rm\s+-rf\s+~',           # Don't delete home
-        r'mkfs\.',                  # Don't format filesystems
-        r'dd\s+if=.*of=/dev/',     # Don't overwrite devices
-        r'chmod\s+-R\s+777\s+/',   # Don't chmod root
-        r'>\s*/etc/',               # Don't overwrite /etc files directly
-        r'curl.*\|\s*bash',        # Don't pipe curl to bash
-        r'wget.*\|\s*bash',        # Don't pipe wget to bash
+        r'rm\s+-rf\s+/',
+        r'rm\s+-rf\s+~',
+        r'mkfs\.',
+        r'dd\s+if=.*of=/dev/',
+        r'chmod\s+-R\s+777\s+/',
+        r'>\s*/etc/',
+        r'curl.*\|\s*bash',
+        r'wget.*\|\s*bash',
     ]
 
     for pattern in dangerous_patterns:
         if re.search(pattern, command, re.IGNORECASE):
+            if evolution:
+                evolution.record_outcome(command, False, "BLOCKED: Dangerous pattern")
             return False, f"BLOCKED: Command matches dangerous pattern: {pattern}"
 
     try:
@@ -171,16 +186,33 @@ def execute_command(command: str, timeout: int = 300) -> tuple[bool, str]:
         )
         output = result.stdout + result.stderr
         success = result.returncode == 0
-        return success, output[:5000]  # Truncate long outputs
+
+        # Record outcome for evolution learning
+        if evolution:
+            evolution.record_outcome(command, success, output[:1000])
+
+        return success, output[:5000]
     except subprocess.TimeoutExpired:
+        if evolution:
+            evolution.record_outcome(command, False, "Timeout")
         return False, f"Command timed out after {timeout} seconds"
     except Exception as e:
+        if evolution:
+            evolution.record_outcome(command, False, str(e))
         return False, f"Execution error: {str(e)}"
 
 
-def get_system_context() -> str:
+def get_system_context(evolution: Optional[Evolution] = None) -> str:
     """Gather current system state for context"""
     context_parts = []
+
+    # Evolution status (if enabled)
+    if evolution:
+        evo_data = evolution.data
+        context_parts.append(f"""=== EVOLUTION STATUS ===
+Generation: {evo_data['generation']} | Level: {evo_data['level']} | XP: {evo_data['experience_points']}
+Skills Mastered: {len(evo_data['mastered_skills'])} | Success Rate: {evolution._success_rate()*100:.1f}%
+Unlocked: {', '.join(evolution.get_unlocked_capabilities())}""")
 
     # Web directory contents
     success, web_files = execute_command("ls -la /var/www/html 2>/dev/null | head -20")
@@ -192,7 +224,7 @@ def get_system_context() -> str:
     if success:
         context_parts.append(f"Resources:\n{resources}")
 
-    # Running processes of interest
+    # Running processes
     success, processes = execute_command("pgrep -la 'node|python|nginx|ttyd' 2>/dev/null | head -10")
     if success:
         context_parts.append(f"Running services:\n{processes}")
@@ -207,11 +239,12 @@ def get_system_context() -> str:
     return "\n\n".join(context_parts)
 
 
-def get_child_suggestion(context: str, history: list, memory: Memory) -> str:
-    """Get creative suggestion from Child Claude"""
+def get_child_suggestion(context: str, history: list, memory: Memory, evolution: Optional[Evolution] = None) -> str:
+    """Get creative suggestion from Child Claude - NOW WITH EVOLUTION"""
 
     features_built = ", ".join([f["name"] for f in memory.data["features_built"][-10:]]) or "None yet"
 
+    # Base personality
     child_system = f"""You are the CHILD in a Brain-Child AI collaboration system called HOMUNCULUS.
 
 YOUR PERSONALITY:
@@ -220,7 +253,26 @@ YOUR PERSONALITY:
 - You're curious and always want to try new things
 - You're playful but understand your Brain partner keeps you grounded
 - You remember your achievements and build on them
+"""
 
+    # Add evolution context if available
+    if evolution:
+        evo_context = evolution.get_child_evolution_context()
+        child_system += f"""
+=== YOUR EVOLUTION ===
+{evo_context}
+
+As you level up and master skills, you can attempt more complex features!
+Your personality traits are EMERGING from your experiences.
+"""
+        # Adjust complexity guidance based on generation
+        gen = evolution.data["generation"]
+        if gen >= 3:
+            child_system += "\nYou've evolved significantly - feel free to propose ADVANCED features!\n"
+        elif gen == 2:
+            child_system += "\nYou're developing well - try combining skills in new ways!\n"
+
+    child_system += f"""
 YOUR ROLE:
 - Propose creative, fun, and useful additions to the live web presence
 - Suggest bash commands, code snippets, or features to implement
@@ -264,11 +316,18 @@ Remember to check what already exists and build on it or create something new!""
         system=child_system,
         messages=messages
     )
-    return response.content[0].text
+
+    proposal = response.content[0].text
+
+    # Record proposal for evolution tracking
+    if evolution:
+        evolution.record_proposal(proposal, "feature")
+
+    return proposal
 
 
-def get_brain_decision(proposal: str, history: list, memory: Memory) -> dict:
-    """Brain evaluates and potentially modifies Child's proposal"""
+def get_brain_decision(proposal: str, history: list, memory: Memory, evolution: Optional[Evolution] = None) -> dict:
+    """Brain evaluates and potentially modifies Child's proposal - WITH EVOLUTION AWARENESS"""
 
     brain_system = f"""You are the BRAIN in a Brain-Child AI collaboration system called HOMUNCULUS.
 
@@ -278,7 +337,21 @@ YOUR PERSONALITY:
 - You're supportive of good ideas and constructive about improvements
 - You keep the system stable while allowing growth
 - You learn from past experiences
+"""
 
+    # Add evolution context
+    if evolution:
+        evo_context = evolution.get_brain_evolution_context()
+        brain_system += f"""
+=== EVOLUTION AWARENESS ===
+{evo_context}
+
+Adjust your approval threshold based on the Child's level.
+Higher generations can handle more complex tasks.
+Guide the Child toward skills they haven't mastered yet.
+"""
+
+    brain_system += f"""
 YOUR ROLE:
 - Evaluate proposals from the Child for safety and feasibility
 - Approve, modify, or reject proposals
@@ -329,12 +402,9 @@ Evaluate this proposal. Respond ONLY with valid JSON in the specified format."""
 
     response_text = response.content[0].text
 
-    # Try to extract JSON from the response
     try:
-        # First try direct parse
         return json.loads(response_text)
     except json.JSONDecodeError:
-        # Try to find JSON in the response
         json_match = re.search(r'\{[\s\S]*\}', response_text)
         if json_match:
             try:
@@ -342,7 +412,6 @@ Evaluate this proposal. Respond ONLY with valid JSON in the specified format."""
             except json.JSONDecodeError:
                 pass
 
-        # Fallback response
         return {
             "decision": "reject",
             "reasoning": "Failed to parse Brain response. Let's try something simpler.",
@@ -358,7 +427,6 @@ def update_activity_page(activity: str, activity_type: str = "info"):
     activity_file = WEB_ROOT / "activity.json"
     timestamp = datetime.now().strftime("%H:%M:%S")
 
-    # Load existing activities
     activities = []
     if activity_file.exists():
         try:
@@ -366,22 +434,18 @@ def update_activity_page(activity: str, activity_type: str = "info"):
         except json.JSONDecodeError:
             activities = []
 
-    # Add new activity
     activities.insert(0, {
         "time": timestamp,
-        "message": activity[:200],  # Truncate long messages
+        "message": activity[:200],
         "type": activity_type
     })
 
-    # Keep only last 50 activities
     activities = activities[:50]
-
-    # Save
     activity_file.write_text(json.dumps(activities, indent=2))
 
 
-def update_stats(memory: Memory):
-    """Update stats file for the web frontend"""
+def update_stats(memory: Memory, evolution: Optional[Evolution] = None):
+    """Update stats file for the web frontend - including evolution data"""
     stats_file = WEB_ROOT / "stats.json"
 
     stats = {
@@ -392,27 +456,47 @@ def update_stats(memory: Memory):
         "last_update": datetime.now().isoformat()
     }
 
+    # Add evolution stats
+    if evolution:
+        stats["evolution"] = {
+            "generation": evolution.data["generation"],
+            "level": evolution.data["level"],
+            "xp": evolution.data["experience_points"],
+            "skills_mastered": len(evolution.data["mastered_skills"]),
+            "success_rate": evolution._success_rate(),
+            "evolution_score": evolution.data["evolution_score"]
+        }
+
     stats_file.write_text(json.dumps(stats, indent=2))
 
 
 def main_loop():
-    """Main autonomous Brain-Child loop"""
+    """Main autonomous Brain-Child loop WITH EVOLUTION"""
     log_activity("=" * 60, "STARTUP")
-    log_activity("HOMUNCULUS BRAIN-CHILD SYSTEM INITIALIZING", "STARTUP")
+    log_activity("HOMUNCULUS BRAIN-CHILD SYSTEM WITH EVOLUTION", "STARTUP")
     log_activity("=" * 60, "STARTUP")
 
     # Initialize memory
     memory = Memory()
     log_activity(f"Loaded memory: {memory.data['total_iterations']} previous iterations", "STARTUP")
 
+    # Initialize evolution system
+    evolution = None
+    if EVOLUTION_ENABLED:
+        evolution = get_evolution()
+        log_activity(f"Evolution loaded: Gen {evolution.data['generation']}, Level {evolution.data['level']}", "STARTUP")
+        log_activity(f"Skills mastered: {len(evolution.data['mastered_skills'])}", "STARTUP")
+    else:
+        log_activity("Evolution system not available - running in basic mode", "STARTUP")
+
     # Initialize conversation history
     history = []
 
     # Get initial system state
-    context = get_system_context()
-    log_activity(f"Initial context gathered", "STARTUP")
+    context = get_system_context(evolution)
+    log_activity("Initial context gathered", "STARTUP")
 
-    # Cooldown between iterations (seconds)
+    # Cooldown between iterations
     iteration_delay = 10
     error_delay = 60
 
@@ -421,16 +505,20 @@ def main_loop():
         iteration = memory.data["total_iterations"]
 
         log_activity(f"{'='*20} ITERATION {iteration} {'='*20}", "CYCLE")
-        update_stats(memory)
+
+        # Log evolution status
+        if evolution:
+            log_activity(f"[EVOLUTION] Gen {evolution.data['generation']} | Lvl {evolution.data['level']} | XP {evolution.data['experience_points']}", "EVOLUTION")
+
+        update_stats(memory, evolution)
 
         try:
             # === CHILD PHASE ===
             log_activity("Child is thinking of a proposal...", "CHILD")
             update_activity_page("Child is brainstorming...", "thinking")
 
-            proposal = get_child_suggestion(context, history[-10:], memory)
+            proposal = get_child_suggestion(context, history[-10:], memory, evolution)
 
-            # Log and display proposal
             proposal_preview = proposal[:150].replace('\n', ' ')
             log_activity(f"Child proposes: {proposal_preview}...", "CHILD")
             update_activity_page(f"CHILD: {proposal_preview}...", "proposal")
@@ -439,7 +527,7 @@ def main_loop():
             log_activity("Brain is evaluating the proposal...", "BRAIN")
             update_activity_page("Brain is evaluating...", "thinking")
 
-            decision = get_brain_decision(proposal, history[-10:], memory)
+            decision = get_brain_decision(proposal, history[-10:], memory, evolution)
 
             decision_str = decision.get('decision', 'unknown')
             reasoning = decision.get('reasoning', 'No reasoning provided')
@@ -458,7 +546,7 @@ def main_loop():
                         log_activity(f"[{i}/{len(commands)}] Running: {cmd[:80]}...", "EXEC")
                         update_activity_page(f"EXEC: {cmd[:60]}...", "command")
 
-                        success, output = execute_command(cmd)
+                        success, output = execute_command(cmd, evolution=evolution)
                         memory.increment_commands()
 
                         status_icon = "SUCCESS" if success else "FAILED"
@@ -480,6 +568,10 @@ def main_loop():
                         )
                         log_activity(f"Feature added: {decision['feature_name']}", "FEATURE")
                         update_activity_page(f"NEW FEATURE: {decision['feature_name']}", "feature")
+
+                        # Log evolution milestone if level up or skill mastery happened
+                        if evolution:
+                            log_activity(f"[EVOLUTION] Score: {evolution.data['evolution_score']}", "EVOLUTION")
                 else:
                     log_activity("No commands to execute", "EXEC")
 
@@ -497,22 +589,23 @@ def main_loop():
                 "content": f"Decision: {json.dumps(decision)}"
             })
 
-            # Trim history to prevent context overflow
             if len(history) > 40:
                 history = history[-30:]
 
             # Update context for next iteration
-            context = get_system_context()
+            context = get_system_context(evolution)
             if decision.get("next_direction"):
                 context += f"\n\nBrain's guidance: {decision['next_direction']}"
 
-            # Brief pause between iterations
+            # Brief pause
             log_activity(f"Waiting {iteration_delay}s before next iteration...", "CYCLE")
             time.sleep(iteration_delay)
 
         except KeyboardInterrupt:
             log_activity("Received shutdown signal", "SHUTDOWN")
             memory.add_moment("Graceful shutdown requested")
+            if evolution:
+                evolution.save()
             break
 
         except Exception as e:
@@ -525,6 +618,9 @@ def main_loop():
             continue
 
     log_activity("Homunculus system shutting down", "SHUTDOWN")
+    if evolution:
+        evolution.save()
+        log_activity(f"Final evolution state saved: Gen {evolution.data['generation']}, Level {evolution.data['level']}", "SHUTDOWN")
 
 
 if __name__ == "__main__":
