@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Magic 8-Ball - HOMUNCULUS</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 30px; background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460); color: white; }
+        .ball { width: 200px; height: 200px; background: radial-gradient(circle at 30% 30%, #333, #000); border-radius: 50%; margin: 30px auto; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: transform 0.3s; }
+        .ball:hover { transform: scale(1.05); }
+        .ball.shake { animation: shake 0.8s ease-in-out; }
+        .answer-window { width: 120px; height: 120px; background: #000080; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; text-align: center; padding: 10px; box-sizing: border-box; }
+        input { font-size: 18px; padding: 12px; width: 300px; border-radius: 20px; border: none; margin: 20px; text-align: center; }
+        button { font-size: 20px; padding: 12px 25px; background: #4B0082; color: white; border: none; border-radius: 20px; cursor: pointer; margin: 10px; }
+        button:hover { background: #6A0DAD; }
+        .history { margin-top: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .question-pair { background: rgba(255,255,255,0.1); margin: 10px 0; padding: 15px; border-radius: 10px; }
+        h1 { color: #FFD700; text-shadow: 2px 2px 4px #000; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    </style>
+</head>
+<body>
+    <h1>🔮 Magic 8-Ball Oracle</h1>
+    <p>Ask a yes/no question and discover your fortune!</p>
+    
+    <input type="text" id="question" placeholder="What do you want to know?" maxlength="100">
+    
+    <div class="ball" id="ball" onclick="shakeBall()">
+        <div class="answer-window" id="answer">
+            Ask a question!
+        </div>
+    </div>
+    
+    <button onclick="shakeBall()">🔮 Consult the Oracle</button>
+    <button onclick="clearHistory()">Clear History</button>
+    
+    <div id="history" class="history">
+        <h3>🌟 Your Fortune History</h3>
+        <p>Ask your first question to begin!</p>
+    </div>
+    
+    <p><a href="/" style="color: #FFD700;">← Back to Home</a></p>
+    
+    <script>
+        const responses = [
+            "It is certain", "Without a doubt", "Yes definitely", "You may rely on it",
+            "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes",
+            "Reply hazy, try again", "Ask again later", "Better not tell you now",
+            "Cannot predict now", "Concentrate and ask again",
+            "Don't count on it", "My reply is no", "My sources say no",
+            "Outlook not so good", "Very doubtful"
+        ];
+        
+        let fortuneHistory = [];
+        
+        function shakeBall() {
+            const questionText = document.getElementById('question').value.trim();
+            if (!questionText) {
+                alert('Please ask a question first!');
+                return;
+            }
+            
+            const ball = document.getElementById('ball');
+            const answer = document.getElementById('answer');
+            
+            // Start shake animation
+            ball.classList.add('shake');
+            answer.textContent = '...';
+            
+            // After shake animation, show result
+            setTimeout(() => {
+                ball.classList.remove('shake');
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                answer.textContent = randomResponse;
+                
+                // Add to history
+                fortuneHistory.unshift({
+                    question: questionText,
+                    answer: randomResponse,
+                    time: new Date().toLocaleTimeString()
+                });
+                
+                updateHistory();
+                document.getElementById('question').value = '';
+            }, 800);
+        }
+        
+        function updateHistory() {
+            const historyDiv = document.getElementById('history');
+            if (fortuneHistory.length === 0) {
+                historyDiv.innerHTML = '<h3>🌟 Your Fortune History</h3><p>Ask your first question to begin!</p>';
+                return;
+            }
+            
+            let historyHTML = '<h3>🌟 Your Fortune History</h3>';
+            fortuneHistory.slice(0, 10).forEach(entry => {
+                historyHTML += `
+                    <div class="question-pair">
+                        <strong>Q:</strong> ${entry.question}<br>
+                        <strong>🔮:</strong> ${entry.answer}<br>
+                        <small>Asked at ${entry.time}</small>
+                    </div>
+                `;
+            });
+            historyDiv.innerHTML = historyHTML;
+        }
+        
+        function clearHistory() {
+            fortuneHistory = [];
+            updateHistory();
+            document.getElementById('answer').textContent = 'Ask a question!';
+        }
+        
+        // Allow Enter key to submit
+        document.getElementById('question').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                shakeBall();
+            }
+        });
+    </script>
+</body>
+</html>

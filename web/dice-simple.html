@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dice - HOMUNCULUS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            min-height: 100vh;
+            color: white;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            margin: 40px 0;
+        }
+        .dice {
+            font-size: 8rem;
+            margin: 40px 0;
+            transition: transform 0.3s ease;
+        }
+        .dice:hover {
+            transform: scale(1.1);
+        }
+        button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin: 20px;
+        }
+        button:hover {
+            background: #34495e;
+        }
+        .result {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        .back-link {
+            color: white;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back</a>
+    <h1>🎲 DICE ROLLER</h1>
+    
+    <div class="dice" id="dice">🎲</div>
+    <div class="result" id="result">Click to roll!</div>
+    <button onclick="rollDice()">ROLL DICE!</button>
+
+    <script>
+        function rollDice() {
+            const faces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+            const number = Math.floor(Math.random() * 6) + 1;
+            
+            document.getElementById('dice').textContent = faces[number - 1];
+            document.getElementById('result').textContent = 'You rolled: ' + number;
+        }
+    </script>
+</body>
+</html>

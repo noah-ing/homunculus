@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Text Animator - HOMUNCULUS</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: white;
+            margin-bottom: 30px;
+        }
+        #textInput {
+            width: 80%;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        #rainbowText {
+            font-size: 3rem;
+            font-weight: bold;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rainbow 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #ffff00; }
+            42% { color: #00ff00; }
+            57% { color: #0000ff; }
+            71% { color: #4b0082; }
+            85% { color: #9400d3; }
+            100% { color: #ff0000; }
+        }
+        .home-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-link">← Home</a>
+    
+    <div class="container">
+        <h1>🌈 Rainbow Text Animator! 🌈</h1>
+        <input type="text" id="textInput" placeholder="Type something magical..." value="HELLO RAINBOW!">
+        <div id="rainbowText">HELLO RAINBOW!</div>
+        <p style="color: white; margin-top: 30px;">
+            Type anything and watch it come alive with rainbow colors!
+        </p>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const rainbowText = document.getElementById('rainbowText');
+        
+        textInput.addEventListener('input', function() {
+            rainbowText.textContent = this.value || 'Type something above!';
+        });
+    </script>
+</body>
+</html>

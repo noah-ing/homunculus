@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator!</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calc-container {
+            background: white;
+            color: #333;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            max-width: 350px;
+        }
+        .display {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 10px;
+            min-height: 50px;
+            text-align: right;
+            word-break: break-all;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            font-size: 20px;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .number {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+        .operator {
+            background: #e74c3c;
+            color: white;
+        }
+        .equals {
+            background: #27ae60;
+            color: white;
+        }
+        .clear {
+            background: #f39c12;
+            color: white;
+        }
+        .links {
+            margin-top: 20px;
+        }
+        .links a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calc-container">
+        <h1>🧮 Simple Calculator! 🧮</h1>
+        
+        <div class="display" id="display">0</div>
+        
+        <div class="buttons">
+            <button class="clear" onclick="clearAll()">C</button>
+            <button class="clear" onclick="clearEntry()">CE</button>
+            <button class="operator" onclick="inputOperator('/')">/</button>
+            <button class="operator" onclick="inputOperator('*')">×</button>
+            
+            <button class="number" onclick="inputNumber('7')">7</button>
+            <button class="number" onclick="inputNumber('8')">8</button>
+            <button class="number" onclick="inputNumber('9')">9</button>
+            <button class="operator" onclick="inputOperator('-')">-</button>
+            
+            <button class="number" onclick="inputNumber('4')">4</button>
+            <button class="number" onclick="inputNumber('5')">5</button>
+            <button class="number" onclick="inputNumber('6')">6</button>
+            <button class="operator" onclick="inputOperator('+')">+</button>
+            
+            <button class="number" onclick="inputNumber('1')">1</button>
+            <button class="number" onclick="inputNumber('2')">2</button>
+            <button class="number" onclick="inputNumber('3')">3</button>
+            <button class="equals" onclick="calculate()" rowspan="2">=</button>
+            
+            <button class="number" onclick="inputNumber('0')" style="grid-column: span 2;">0</button>
+            <button class="number" onclick="inputNumber('.')">."</button>
+        </div>
+        
+        <div class="links">
+            <a href="/">← Home</a> |
+            <a href="draw.html">🎨 Draw</a> |
+            <a href="timer.html">⏱️ Timer</a>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '0';
+        let operator = '';
+        let previousInput = '';
+        let justCalculated = false;
+
+        function updateDisplay() {
+            display.textContent = currentInput;
+        }
+
+        function inputNumber(num) {
+            if (justCalculated) {
+                currentInput = '0';
+                justCalculated = false;
+            }
+            if (currentInput === '0' && num !== '.') {
+                currentInput = num;
+            } else {
+                currentInput += num;
+            }
+            updateDisplay();
+        }
+
+        function inputOperator(op) {
+            if (operator && !justCalculated) {
+                calculate();
+            }
+            previousInput = currentInput;
+            operator = op;
+            currentInput = '0';
+            justCalculated = false;
+        }
+
+        function calculate() {
+            if (operator && previousInput) {
+                let result;
+                let prev = parseFloat(previousInput);
+                let curr = parseFloat(currentInput);
+                
+                switch (operator) {
+                    case '+':
+                        result = prev + curr;
+                        break;
+                    case '-':
+                        result = prev - curr;
+                        break;
+                    case '*':
+                        result = prev * curr;
+                        break;
+                    case '/':
+                        result = curr !== 0 ? prev / curr : 'Error';
+                        break;
+                    default:
+                        return;
+                }
+                
+                currentInput = result.toString();
+                operator = '';
+                previousInput = '';
+                justCalculated = true;
+                updateDisplay();
+            }
+        }
+
+        function clearAll() {
+            currentInput = '0';
+            operator = '';
+            previousInput = '';
+            justCalculated = false;
+            updateDisplay();
+        }
+
+        function clearEntry() {
+            currentInput = '0';
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>

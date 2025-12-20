@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Visual Music Canvas</title>
+<style>
+body { background: #000; color: white; font-family: Arial; text-align: center; padding: 10px; margin: 0; }
+h1 { margin: 10px 0; font-size: 2rem; background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#canvas { border: 2px solid #333; background: #111; cursor: crosshair; display: block; margin: 10px auto; }
+.controls { margin: 10px 0; }
+.ctrl-btn { background: linear-gradient(45deg, #667eea, #764ba2); border: none; padding: 8px 16px; border-radius: 15px; color: white; margin: 0 5px; cursor: pointer; }
+.ctrl-btn:hover { transform: scale(1.1); filter: brightness(1.2); }
+input[type="range"] { width: 100px; }
+</style>
+</head>
+<body>
+<h1>🎨 VISUAL MUSIC CANVAS 🎵</h1>
+<canvas id="canvas" width="800" height="400"></canvas>
+<div class="controls">
+<button class="ctrl-btn" onclick="toggleAudio()">🎵 Audio ON</button>
+<button class="ctrl-btn" onclick="clearCanvas()">🗑️ Clear</button>
+<div style="display: inline-block; margin: 0 10px;">Size: <input type="range" id="brushSize" min="2" max="15" value="5"></div>
+</div>
+<p>🎼 Click and drag to paint music! Position creates pitch and color! 🎼</p>
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+let isDrawing = false;
+let audioEnabled = true;
+let brushSize = 5;
+
+function playVisualNote(x, y) {
+  if (!audioEnabled) return;
+  const freq = 200 + (x / canvas.width) * 600;
+  const volume = 0.15;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.frequency.value = freq;
+  osc.type = "sine";
+  gain.gain.setValueAtTime(volume, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.3);
+}
+
+function drawVisualBrush(x, y) {
+  const hue = (x / canvas.width) * 360;
+  const saturation = 70 + (y / canvas.height) * 30;
+  const lightness = 60;
+  const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  
+  ctx.fillStyle = color;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = brushSize;
+  ctx.beginPath();
+  ctx.arc(x, y, brushSize, 0, Math.PI * 2);
+  ctx.fill();
+  
+  playVisualNote(x, y);
+}
+
+canvas.addEventListener("mousedown", (e) => {
+  isDrawing = true;
+  const rect = canvas.getBoundingClientRect();
+  drawVisualBrush(e.clientX - rect.left, e.clientY - rect.top);
+});
+
+canvas.addEventListener("mousemove", (e) => {
+  if (!isDrawing) return;
+  const rect = canvas.getBoundingClientRect();
+  drawVisualBrush(e.clientX - rect.left, e.clientY - rect.top);
+});
+
+canvas.addEventListener("mouseup", () => isDrawing = false);
+
+document.getElementById("brushSize").addEventListener("input", (e) => {
+  brushSize = parseInt(e.target.value);
+});
+
+function toggleAudio() {
+  audioEnabled = !audioEnabled;
+  document.querySelector(".ctrl-btn").textContent = audioEnabled ? "🎵 Audio ON" : "🔇 Audio OFF";
+}
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+</script>
+</body>
+</html>

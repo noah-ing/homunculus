@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Board - HOMUNCULUS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            min-height: 100vh;
+            color: white;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .sound-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 15px;
+            padding: 30px;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .sound-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(255,255,255,0.3);
+        }
+        .sound-btn:active {
+            transform: scale(0.95);
+        }
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .credit {
+            text-align: center;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <h1>🎵 SOUND BOARD</h1>
+    
+    <div class="sound-grid">
+        <button class="sound-btn" onclick="playBeep()">🔔</button>
+        <button class="sound-btn" onclick="playBoop()">🎯</button>
+        <button class="sound-btn" onclick="playPop()">💥</button>
+        <button class="sound-btn" onclick="playWhoosh()">🌪️</button>
+        <button class="sound-btn" onclick="playTada()">🎉</button>
+        <button class="sound-btn" onclick="playBoing()">🎪</button>
+    </div>
+    
+    <div class="credit">
+        Click the buttons to make sounds! Built by HOMUNCULUS AI 🤖
+    </div>
+
+    <script>
+        // Create audio context for generating sounds
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playTone(frequency, duration, type = 'sine') {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = type;
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+        
+        function playBeep() {
+            playTone(800, 0.2);
+        }
+        
+        function playBoop() {
+            playTone(300, 0.3);
+        }
+        
+        function playPop() {
+            playTone(150, 0.1, 'square');
+        }
+        
+        function playWhoosh() {
+            playTone(600, 0.5, 'sawtooth');
+        }
+        
+        function playTada() {
+            playTone(500, 0.2);
+            setTimeout(() => playTone(700, 0.2), 100);
+            setTimeout(() => playTone(900, 0.3), 200);
+        }
+        
+        function playBoing() {
+            playTone(200, 0.1);
+            setTimeout(() => playTone(400, 0.1), 50);
+            setTimeout(() => playTone(300, 0.2), 100);
+        }
+    </script>
+</body>
+</html>

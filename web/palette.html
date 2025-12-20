@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palettes - HOMUNCULUS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #2c3e50;
+            color: white;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+        .palette {
+            background: white;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .palette-name {
+            background: #34495e;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .colors {
+            display: flex;
+            height: 100px;
+        }
+        .color {
+            flex: 1;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s;
+        }
+        .color:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        .color-code {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .color:hover .color-code {
+            opacity: 1;
+        }
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .message {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <h1>🎨 COLOR PALETTES</h1>
+    <div class="message">Click any color to copy its hex code!</div>
+    
+    <div class="palette">
+        <div class="palette-name">Ocean Breeze</div>
+        <div class="colors">
+            <div class="color" style="background: #0077be;" onclick="copyColor('#0077be')">
+                <div class="color-code">#0077be</div>
+            </div>
+            <div class="color" style="background: #00a8cc;" onclick="copyColor('#00a8cc')">
+                <div class="color-code">#00a8cc</div>
+            </div>
+            <div class="color" style="background: #40e0d0;" onclick="copyColor('#40e0d0')">
+                <div class="color-code">#40e0d0</div>
+            </div>
+            <div class="color" style="background: #7dd3c0;" onclick="copyColor('#7dd3c0')">
+                <div class="color-code">#7dd3c0</div>
+            </div>
+            <div class="color" style="background: #afeeee;" onclick="copyColor('#afeeee')">
+                <div class="color-code">#afeeee</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="palette">
+        <div class="palette-name">Sunset Vibes</div>
+        <div class="colors">
+            <div class="color" style="background: #ff6b6b;" onclick="copyColor('#ff6b6b')">
+                <div class="color-code">#ff6b6b</div>
+            </div>
+            <div class="color" style="background: #ff8e53;" onclick="copyColor('#ff8e53')">
+                <div class="color-code">#ff8e53</div>
+            </div>
+            <div class="color" style="background: #ff6348;" onclick="copyColor('#ff6348')">
+                <div class="color-code">#ff6348</div>
+            </div>
+            <div class="color" style="background: #ffa726;" onclick="copyColor('#ffa726')">
+                <div class="color-code">#ffa726</div>
+            </div>
+            <div class="color" style="background: #ffcc02;" onclick="copyColor('#ffcc02')">
+                <div class="color-code">#ffcc02</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyColor(color) {
+            navigator.clipboard.writeText(color).then(() => {
+                alert('Copied ' + color + ' to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html><head><title>🌈 Rainbow Trail - HOMUNCULUS</title>
+<style>body{margin:0;padding:0;background:#000;overflow:hidden;cursor:none}canvas{display:block}</style></head>
+<body><canvas id='canvas'></canvas>
+<script>const c=document.getElementById('canvas');const ctx=c.getContext('2d');c.width=window.innerWidth;c.height=window.innerHeight;
+let hue=0;let trails=[];window.addEventListener('mousemove',e=>{trails.push({x:e.clientX,y:e.clientY,hue:hue,life:30});hue=(hue+2)%360});
+function animate(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,c.width,c.height);trails.forEach((trail,i)=>{ctx.fillStyle='hsl('+trail.hue+',100%,'+(trail.life*2)+'%)';ctx.beginPath();ctx.arc(trail.x,trail.y,trail.life/3,0,Math.PI*2);ctx.fill();trail.life--;if(trail.life<=0)trails.splice(i,1)});requestAnimationFrame(animate)}animate()</script></body></html>
+<p style='position:fixed;bottom:10px;left:10px;color:white;font-family:monospace'><a href='games.html' style='color:#FFD700'>🎮 Back to Games</a></p>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Guessing Game!</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ff9a56, #ff6b9d);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .game-container {
+            background: white;
+            color: #333;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            max-width: 400px;
+        }
+        input {
+            font-size: 24px;
+            padding: 15px;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            width: 150px;
+            margin: 20px;
+        }
+        button {
+            background: #ff6b9d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .message {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+            min-height: 50px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .links {
+            margin-top: 30px;
+        }
+        .links a {
+            color: #ff6b9d;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎯 Number Guessing Game! 🎯</h1>
+        <p>I'm thinking of a number between 1 and 100!</p>
+        
+        <input type="number" id="guessInput" placeholder="Your guess" min="1" max="100">
+        <br>
+        <button onclick="makeGuess()">Guess!</button>
+        <button onclick="newGame()">New Game</button>
+        
+        <div class="message" id="message">Make your first guess!</div>
+        
+        <div class="stats">
+            <div>Attempts: <span id="attempts">0</span></div>
+            <div>Best: <span id="best">--</span></div>
+        </div>
+        
+        <div class="links">
+            <a href="/">← Home</a> |
+            <a href="calc.html">🧮 Calc</a> |
+            <a href="timer.html">⏱️ Timer</a>
+        </div>
+    </div>
+
+    <script>
+        let targetNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+        let bestScore = localStorage.getItem('bestGuess') || null;
+        
+        if (bestScore) {
+            document.getElementById('best').textContent = bestScore;
+        }
+
+        function makeGuess() {
+            const input = document.getElementById('guessInput');
+            const guess = parseInt(input.value);
+            const message = document.getElementById('message');
+            
+            if (!guess || guess < 1 || guess > 100) {
+                message.textContent = 'Please enter a number between 1 and 100!';
+                return;
+            }
+            
+            attempts++;
+            document.getElementById('attempts').textContent = attempts;
+            
+            if (guess === targetNumber) {
+                message.innerHTML = `🎉 CORRECT! You got it in ${attempts} attempts! 🎉`;
+                
+                if (!bestScore || attempts < bestScore) {
+                    bestScore = attempts;
+                    localStorage.setItem('bestGuess', bestScore);
+                    document.getElementById('best').textContent = bestScore;
+                    message.innerHTML += '<br>🏆 New personal best! 🏆';
+                }
+                
+                input.disabled = true;
+            } else if (guess < targetNumber) {
+                message.textContent = '📈 Too low! Try higher!';
+            } else {
+                message.textContent = '📉 Too high! Try lower!';
+            }
+            
+            input.value = '';
+            input.focus();
+        }
+
+        function newGame() {
+            targetNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            document.getElementById('attempts').textContent = '0';
+            document.getElementById('message').textContent = 'Make your first guess!';
+            document.getElementById('guessInput').value = '';
+            document.getElementById('guessInput').disabled = false;
+            document.getElementById('guessInput').focus();
+        }
+
+        // Allow Enter key to make guess
+        document.getElementById('guessInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                makeGuess();
+            }
+        });
+        
+        // Focus input on load
+        document.getElementById('guessInput').focus();
+    </script>
+</body>
+</html>

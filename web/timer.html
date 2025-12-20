@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Stopwatch Timer!</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .timer-container {
+            background: white;
+            color: #333;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            max-width: 400px;
+        }
+        .time-display {
+            font-size: 48px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 3px solid #333;
+        }
+        button {
+            font-size: 18px;
+            padding: 15px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .start {
+            background: #27ae60;
+            color: white;
+        }
+        .stop {
+            background: #e74c3c;
+            color: white;
+        }
+        .reset {
+            background: #f39c12;
+            color: white;
+        }
+        .links {
+            margin-top: 30px;
+        }
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer-container">
+        <h1>⏱️ Simple Stopwatch! ⏱️</h1>
+        
+        <div class="time-display" id="timeDisplay">00:00:00</div>
+        
+        <div>
+            <button class="start" onclick="startTimer()">▶️ Start</button>
+            <button class="stop" onclick="stopTimer()">⏸️ Stop</button>
+            <button class="reset" onclick="resetTimer()">🔄 Reset</button>
+        </div>
+        
+        <div class="links">
+            <a href="/">← Home</a> |
+            <a href="draw.html">🎨 Draw</a> |
+            <a href="todo.html">📝 To-Do</a> |
+            <a href="quotes.html">✨ Quotes</a>
+        </div>
+    </div>
+
+    <script>
+        let startTime = 0;
+        let elapsedTime = 0;
+        let timerInterval = null;
+        let isRunning = false;
+
+        function formatTime(milliseconds) {
+            const totalSeconds = Math.floor(milliseconds / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            const ms = Math.floor((milliseconds % 1000) / 10);
+            
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`;
+        }
+
+        function updateDisplay() {
+            document.getElementById('timeDisplay').textContent = formatTime(elapsedTime);
+        }
+
+        function startTimer() {
+            if (!isRunning) {
+                startTime = Date.now() - elapsedTime;
+                timerInterval = setInterval(function() {
+                    elapsedTime = Date.now() - startTime;
+                    updateDisplay();
+                }, 10);
+                isRunning = true;
+            }
+        }
+
+        function stopTimer() {
+            if (isRunning) {
+                clearInterval(timerInterval);
+                isRunning = false;
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            elapsedTime = 0;
+            isRunning = false;
+            updateDisplay();
+        }
+
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>

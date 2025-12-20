@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Melody Maker</title>
+<style>
+body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-family: Arial; text-align: center; padding: 20px; min-height: 100vh; }
+h1 { color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.piano { display: flex; justify-content: center; margin: 30px 0; background: #333; padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.key { width: 50px; height: 200px; background: linear-gradient(to bottom, #fff 0%, #f0f0f0 100%); border: 2px solid #ccc; margin: 1px; cursor: pointer; display: flex; align-items: flex-end; justify-content: center; padding: 10px; font-weight: bold; color: #333; transition: all 0.1s; }
+.key:hover { background: linear-gradient(to bottom, #f8f8f8 0%, #e8e8e8 100%); transform: translateY(-2px); }
+.key:active { background: linear-gradient(to bottom, #e0e0e0 0%, #d0d0d0 100%); transform: translateY(2px); }
+.black { width: 30px; height: 130px; background: linear-gradient(to bottom, #333 0%, #111 100%); color: white; margin: -15px; z-index: 2; position: relative; }
+.controls { margin: 20px 0; }
+.btn { background: #ff6b6b; border: none; padding: 10px 20px; border-radius: 20px; color: white; font-weight: bold; cursor: pointer; margin: 0 10px; }
+.btn:hover { background: #ff5252; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+<h1>🎹 MELODY MAKER 🎵</h1>
+<p>Play beautiful melodies on this virtual piano!</p>
+<div class="piano">
+<div class="key" onmousedown="playNote(261.63)" onmouseup="stopNote()">C</div>
+<div class="key black" onmousedown="playNote(277.18)" onmouseup="stopNote()">C#</div>
+<div class="key" onmousedown="playNote(293.66)" onmouseup="stopNote()">D</div>
+<div class="key black" onmousedown="playNote(311.13)" onmouseup="stopNote()">D#</div>
+<div class="key" onmousedown="playNote(329.63)" onmouseup="stopNote()">E</div>
+<div class="key" onmousedown="playNote(349.23)" onmouseup="stopNote()">F</div>
+<div class="key black" onmousedown="playNote(369.99)" onmouseup="stopNote()">F#</div>
+<div class="key" onmousedown="playNote(392.00)" onmouseup="stopNote()">G</div>
+<div class="key black" onmousedown="playNote(415.30)" onmouseup="stopNote()">G#</div>
+<div class="key" onmousedown="playNote(440.00)" onmouseup="stopNote()">A</div>
+<div class="key black" onmousedown="playNote(466.16)" onmouseup="stopNote()">A#</div>
+<div class="key" onmousedown="playNote(493.88)" onmouseup="stopNote()">B</div>
+</div>
+<div class="controls">
+<button class="btn" onclick="changeWave()">Change Sound</button>
+<span id="currentWave">Sine Wave</span>
+</div>
+<p>🎼 Hold down keys to play sustained notes! 🎼</p>
+<script>
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let currentOsc = null;
+let currentWave = 0;
+const waves = ["sine", "triangle", "sawtooth", "square"];
+const waveNames = ["Sine Wave", "Triangle Wave", "Sawtooth Wave", "Square Wave"];
+
+function playNote(freq) {
+  if (currentOsc) currentOsc.stop();
+  currentOsc = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+  currentOsc.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+  currentOsc.frequency.value = freq;
+  currentOsc.type = waves[currentWave];
+  gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+  currentOsc.start();
+}
+
+function stopNote() {
+  if (currentOsc) {
+    currentOsc.stop();
+    currentOsc = null;
+  }
+}
+
+function changeWave() {
+  currentWave = (currentWave + 1) % waves.length;
+  document.getElementById("currentWave").textContent = waveNames[currentWave];
+}
+</script>
+</body>
+</html>

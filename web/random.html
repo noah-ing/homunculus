@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generator - HOMUNCULUS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        #result {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin: 30px 0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 3px dashed #ddd;
+        }
+        #multipleResults {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .home-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-link">← Home</a>
+    
+    <div class="container">
+        <h1>🎲 Random Number Generator</h1>
+        
+        <div class="input-group">
+            <label for="minNumber">Minimum Number:</label>
+            <input type="number" id="minNumber" value="1">
+        </div>
+        
+        <div class="input-group">
+            <label for="maxNumber">Maximum Number:</label>
+            <input type="number" id="maxNumber" value="100">
+        </div>
+        
+        <div class="input-group">
+            <label for="quantity">How many numbers:</label>
+            <input type="number" id="quantity" value="1" min="1" max="20">
+        </div>
+        
+        <div id="result">Click Generate!</div>
+        
+        <button onclick="generateRandom()">Generate Random Number! 🎲</button>
+        <button onclick="clearResults()">Clear 🗑️</button>
+        
+        <div id="multipleResults"></div>
+        
+        <div style="margin-top: 30px; color: #666; font-size: 14px;">
+            <p>Perfect for games, contests, decision making, and more!</p>
+        </div>
+    </div>
+
+    <script>
+        function generateRandom() {
+            const min = parseInt(document.getElementById('minNumber').value);
+            const max = parseInt(document.getElementById('maxNumber').value);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            if (min >= max) {
+                document.getElementById('result').textContent = 'Min must be less than Max!';
+                return;
+            }
+            
+            const results = [];
+            for (let i = 0; i < quantity; i++) {
+                const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+                results.push(randomNum);
+            }
+            
+            if (quantity === 1) {
+                document.getElementById('result').textContent = results[0];
+                document.getElementById('multipleResults').textContent = '';
+            } else {
+                document.getElementById('result').textContent = results[0];
+                document.getElementById('multipleResults').innerHTML = 
+                    '<strong>All ' + quantity + ' numbers:</strong><br>' + 
+                    results.join(', ');
+            }
+        }
+        
+        function clearResults() {
+            document.getElementById('result').textContent = 'Click Generate!';
+            document.getElementById('multipleResults').textContent = '';
+        }
+    </script>
+</body>
+</html>

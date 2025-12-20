@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Beat Maker</title>
+<style>
+body { background: #222; color: white; font-family: Arial; text-align: center; padding: 20px; }
+.beat-pad { display: inline-block; margin: 10px; width: 100px; height: 100px; background: #444; border: 3px solid #666; border-radius: 10px; cursor: pointer; font-size: 14px; line-height: 100px; }
+.beat-pad:hover { background: #555; }
+.beat-pad:active { background: #777; transform: scale(0.95); }
+h1 { color: #ff6b6b; }
+</style>
+</head>
+<body>
+<h1>🥁 BEAT MAKER 🎵</h1>
+<p>Click the pads to make beats!</p>
+<div class="beat-pad" onclick="playBeat(200, 0.1)">KICK</div>
+<div class="beat-pad" onclick="playBeat(800, 0.05)">SNARE</div>
+<div class="beat-pad" onclick="playBeat(1200, 0.03)">HI-HAT</div>
+<div class="beat-pad" onclick="playBeat(400, 0.08)">CLAP</div>
+<script>
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playBeat(freq, duration) {
+  const oscillator = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+  oscillator.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+  oscillator.frequency.value = freq;
+  oscillator.type = "square";
+  gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+  oscillator.start();
+  oscillator.stop(audioCtx.currentTime + duration);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ASCII Art Maker</title>
+<style>
+body { background: linear-gradient(45deg, #2c3e50, #4a6741); color: white; font-family: Arial; text-align: center; padding: 20px; }
+h1 { color: #ecf0f1; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
+.input-box { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; max-width: 600px; margin: 0 auto; }
+#textInput { padding: 15px; font-size: 1.2rem; border-radius: 10px; border: none; width: 300px; text-align: center; }
+.btn { background: #e74c3c; border: none; padding: 15px 30px; border-radius: 25px; color: white; font-weight: bold; margin: 10px; cursor: pointer; font-size: 1.1rem; }
+.btn:hover { background: #c0392b; transform: translateY(-2px); }
+#output { background: #2c3e50; padding: 20px; border-radius: 10px; margin: 20px 0; font-family: 'Courier New', monospace; white-space: pre; overflow-x: auto; min-height: 100px; font-size: 12px; line-height: 1.2; }
+</style>
+</head>
+<body>
+<h1>🎨 ASCII ART MAKER 🎨</h1>
+<div class="input-box">
+<input type="text" id="textInput" placeholder="Enter text (max 10 chars)" maxlength="10">
+<br>
+<button class="btn" onclick="generateArt()">✨ Make Art!</button>
+<button class="btn" onclick="clearOutput()">🗑️ Clear</button>
+<div id="output">Your ASCII art will appear here!</div>
+</div>
+<script>
+const patterns = {
+'A': ['  ██  ', ' ████ ', '██  ██', '██████', '██  ██', '██  ██', '      '],
+'B': ['██████', '██  ██', '██████', '██████', '██  ██', '██████', '      '],
+'C': [' █████', '██    ', '██    ', '██    ', '██    ', ' █████', '      '],
+'D': ['██████', '██  ██', '██  ██', '██  ██', '██  ██', '██████', '      '],
+'E': ['██████', '██    ', '█████ ', '█████ ', '██    ', '██████', '      '],
+'H': ['██  ██', '██  ██', '██████', '██████', '██  ██', '██  ██', '      '],
+'I': ['██████', '  ██  ', '  ██  ', '  ██  ', '  ██  ', '██████', '      '],
+'L': ['██    ', '██    ', '██    ', '██    ', '██    ', '██████', '      '],
+'O': [' █████', '██  ██', '██  ██', '██  ██', '██  ██', ' █████', '      '],
+'R': ['██████', '██  ██', '██████', '██ ██ ', '██  ██', '██  ██', '      '],
+'T': ['██████', '  ██  ', '  ██  ', '  ██  ', '  ██  ', '  ██  ', '      '],
+'U': ['██  ██', '██  ██', '██  ██', '██  ██', '██  ██', ' █████', '      '],
+' ': ['      ', '      ', '      ', '      ', '      ', '      ', '      ']
+};
+function generateArt() {
+const text = document.getElementById('textInput').value.toUpperCase();
+if (!text) return;
+let result = '';
+for (let row = 0; row < 7; row++) {
+let line = '';
+for (let char of text) {
+line += (patterns[char] || patterns[' '])[row];
+}
+result += line + '\n';
+}
+document.getElementById('output').textContent = result;
+}
+function clearOutput() {
+document.getElementById('output').textContent = 'Your ASCII art will appear here!';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Drawing Pad!</title>
+    <style>
+        body {
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        canvas {
+            border: 3px solid #333;
+            background: white;
+            cursor: crosshair;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .red { background: #ff4757; }
+        .blue { background: #3742fa; }
+        .green { background: #2ed573; }
+    </style>
+</head>
+<body>
+    <h1>🎨 Simple Drawing Pad! 🎨</h1>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <br>
+    <button onclick="setColor('black')">⚫ Black</button>
+    <button class="red" onclick="setColor('red')">🔴 Red</button>
+    <button class="blue" onclick="setColor('blue')">🔵 Blue</button>
+    <button class="green" onclick="setColor('green')">🟢 Green</button>
+    <button onclick="clearCanvas()">🗑️ Clear</button>
+    <br>
+    <a href="/">← Back to Home</a>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let currentColor = 'black';
+
+        function setColor(color) {
+            currentColor = color;
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        canvas.addEventListener('mousedown', function(e) {
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.strokeStyle = currentColor;
+            ctx.lineWidth = 3;
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            isDrawing = false;
+        });
+    </script>
+</body>
+</html>

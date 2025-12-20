@@ -1,0 +1,1461 @@
+{
+  "current_generation": 3,
+  "level": 9,
+  "experience": 3187,
+  "xp_to_next_level": 3844,
+  "skills": {
+    "html_basics": 107.0,
+    "css_styling": 207.75,
+    "javascript": 182.0,
+    "canvas_games": 90.0,
+    "web_audio": 30.0,
+    "localStorage": 9.0,
+    "animations": 72.0,
+    "responsive_design": 0,
+    "bash_basics": 242,
+    "file_operations": 108.75,
+    "process_management": 0,
+    "nginx_config": 0,
+    "python_scripting": 0,
+    "node_js": 8,
+    "api_development": 7.5,
+    "database_ops": 0,
+    "websockets": 0,
+    "ai_integration": 0,
+    "self_modification": 0
+  },
+  "mastered_skills": [
+    "css_styling",
+    "html_basics",
+    "file_operations",
+    "javascript",
+    "bash_basics",
+    "animations",
+    "localStorage",
+    "web_audio",
+    "node_js",
+    "canvas_games"
+  ],
+  "personality": {
+    "creativity": 1,
+    "enthusiasm": 1,
+    "caution": 1,
+    "persistence": 0.5,
+    "complexity_preference": 0.5,
+    "social": 1,
+    "artistic": 1,
+    "systematic": 0.5
+  },
+  "timeline": [
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "api_development",
+        "web_audio",
+        "html_basics",
+        "bash_basics",
+        "css_styling",
+        "animations"
+      ],
+      "xp_gained": 37,
+      "command_preview": "echo '<!DOCTYPE html>\n<html>\n<head>\n<title>Homunculus Music Studio</title>\n<style>\nbody { background",
+      "timestamp": "2025-12-20T03:41:07.517964",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics"
+      ],
+      "xp_gained": 9,
+      "command_preview": "echo '<p><a href=\"music-studio.html\">\ud83c\udfb5 MUSIC STUDIO HUB</a></p>' >> /var/www/html/index.html",
+      "timestamp": "2025-12-20T03:41:07.527373",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "canvas_games",
+        "javascript",
+        "web_audio",
+        "html_basics",
+        "bash_basics",
+        "css_styling",
+        "animations"
+      ],
+      "xp_gained": 39,
+      "command_preview": "echo '<!DOCTYPE html>\n<html>\n<head>\n<title>Visual Music Canvas</title>\n<style>\nbody { background: #0",
+      "timestamp": "2025-12-20T03:42:04.593816",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "skill_mastered",
+      "skill": "canvas_games",
+      "message": "Mastered Canvas Games!",
+      "total_mastered": 10,
+      "timestamp": "2025-12-20T03:42:04.601943",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 16,
+      "command_preview": "echo '<p><a href=\"visual-music.html\">\ud83c\udfa8 Visual Music Canvas</a></p>' >> /var/www/html/index.html",
+      "timestamp": "2025-12-20T03:42:04.601956",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "javascript",
+        "html_basics",
+        "bash_basics",
+        "file_operations",
+        "css_styling",
+        "animations"
+      ],
+      "xp_gained": 27,
+      "command_preview": "cat > /var/www/html/ascii-art.html << 'EOF'\n<!DOCTYPE html>\n<html>\n<head>\n<title>ASCII Art Maker</ti",
+      "timestamp": "2025-12-20T03:43:53.610229",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics"
+      ],
+      "xp_gained": 9,
+      "command_preview": "echo '<p><a href=\"ascii-art.html\">\ud83c\udfa8 ASCII Art Maker</a></p>' >> /var/www/html/index.html",
+      "timestamp": "2025-12-20T03:43:53.620118",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "animations",
+        "bash_basics",
+        "css_styling"
+      ],
+      "xp_gained": 23,
+      "command_preview": "echo '<!DOCTYPE html><html><head><title>Game Center</title><style>body{background:#1a1a2e;color:#fff",
+      "timestamp": "2025-12-20T03:45:20.297530",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics"
+      ],
+      "xp_gained": 17,
+      "command_preview": "echo '<a href=\"beats.html\">\ud83e\udd41 Beat Maker</a><a href=\"melody.html\">\ud83c\udfb9 Piano</a><a href=\"visual-music.ht",
+      "timestamp": "2025-12-20T03:45:20.304504",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics"
+      ],
+      "xp_gained": 9,
+      "command_preview": "echo '<p><a href=\"games.html\">\ud83c\udfae GAME CENTER</a></p>' >> /var/www/html/index.html",
+      "timestamp": "2025-12-20T03:45:20.310049",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [],
+      "xp_gained": 6,
+      "command_preview": "touch /var/www/html/rainbow-trail.html",
+      "timestamp": "2025-12-20T03:48:42.052717",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 10,
+      "command_preview": "echo \"<!DOCTYPE html>\" > /var/www/html/rainbow-trail.html",
+      "timestamp": "2025-12-20T03:48:42.061507",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 11,
+      "command_preview": "echo \"<html><head><title>\ud83c\udf08 Rainbow Trail - HOMUNCULUS</title>\" >> /var/www/html/rainbow-trail.html",
+      "timestamp": "2025-12-20T03:48:42.068179",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 20,
+      "command_preview": "echo \"<style>body{margin:0;padding:0;background:#000;overflow:hidden;cursor:none}canvas{display:bloc",
+      "timestamp": "2025-12-20T03:48:42.074594",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 18,
+      "command_preview": "echo \"<body><canvas id='canvas'></canvas>\" >> /var/www/html/rainbow-trail.html",
+      "timestamp": "2025-12-20T03:48:42.081685",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo \"<script>const c=document.getElementById('canvas');const ctx=c.getContext('2d');c.width=window.",
+      "timestamp": "2025-12-20T03:48:42.088379",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 14,
+      "command_preview": "echo \"let hue=0;let trails=[];window.addEventListener('mousemove',e=>{trails.push({x:e.clientX,y:e.c",
+      "timestamp": "2025-12-20T03:48:42.098032",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 28,
+      "command_preview": "echo \"function animate(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,c.width,c.height);trails.",
+      "timestamp": "2025-12-20T03:48:42.106267",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 14,
+      "command_preview": "echo \"<p style='position:fixed;bottom:10px;left:10px;color:white;font-family:monospace'><a href='gam",
+      "timestamp": "2025-12-20T03:48:42.115235",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [],
+      "xp_gained": 6,
+      "command_preview": "touch /var/www/html/fireworks.html",
+      "timestamp": "2025-12-20T03:49:24.946242",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 10,
+      "command_preview": "echo \"<!DOCTYPE html>\" > /var/www/html/fireworks.html",
+      "timestamp": "2025-12-20T03:49:24.959769",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 11,
+      "command_preview": "echo \"<html><head><title>\ud83c\udf86 Fireworks Show - HOMUNCULUS</title>\" >> /var/www/html/fireworks.html",
+      "timestamp": "2025-12-20T03:49:24.968743",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo \"<style>body{margin:0;padding:0;background:linear-gradient(180deg,#001122,#000000);overflow:hid",
+      "timestamp": "2025-12-20T03:49:24.976184",
+      "generation": 3,
+      "level": 7
+    },
+    {
+      "type": "level_up",
+      "new_level": 8,
+      "message": "Reached Level 8!",
+      "timestamp": "2025-12-20T03:49:24.983367",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 18,
+      "command_preview": "echo \"<body><canvas id='canvas'></canvas>\" >> /var/www/html/fireworks.html",
+      "timestamp": "2025-12-20T03:49:24.983397",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo \"<script>const c=document.getElementById('canvas');const ctx=c.getContext('2d');c.width=window.",
+      "timestamp": "2025-12-20T03:49:24.991296",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 15,
+      "command_preview": "echo \"let fireworks=[];let particles=[];class Firework{constructor(x,y){this.x=x;this.y=c.height;thi",
+      "timestamp": "2025-12-20T03:49:24.998900",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 15,
+      "command_preview": "echo \"update(){this.y+=this.vy;if(this.y<=this.targetY&&!this.exploded){this.explode();this.exploded",
+      "timestamp": "2025-12-20T03:49:25.006718",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo \"draw(){if(!this.exploded){ctx.fillStyle='hsl('+this.hue+',100%,70%)';ctx.beginPath();ctx.arc(t",
+      "timestamp": "2025-12-20T03:49:25.013799",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 18,
+      "command_preview": "echo \"update(){this.vx*=0.99;this.vy*=0.99;this.vy+=this.gravity;this.x+=this.vx;this.y+=this.vy;thi",
+      "timestamp": "2025-12-20T03:49:25.022316",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 28,
+      "command_preview": "echo \"c.addEventListener('click',e=>{fireworks.push(new Firework(e.clientX,e.clientY+Math.random()*1",
+      "timestamp": "2025-12-20T03:49:25.031034",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 15,
+      "command_preview": "echo \"<p style='position:fixed;top:10px;left:10px;color:white;font-family:monospace;background:rgba(",
+      "timestamp": "2025-12-20T03:49:25.035934",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 14,
+      "command_preview": "echo \"<p style='position:fixed;bottom:10px;left:10px;color:white;font-family:monospace'><a href='gam",
+      "timestamp": "2025-12-20T03:49:25.041769",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics"
+      ],
+      "xp_gained": 8,
+      "command_preview": "echo \"</body></html>\" >> /var/www/html/fireworks.html",
+      "timestamp": "2025-12-20T03:49:25.046461",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [],
+      "xp_gained": 6,
+      "command_preview": "touch /var/www/html/particle-lab.html",
+      "timestamp": "2025-12-20T03:50:20.270890",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 10,
+      "command_preview": "echo \"<!DOCTYPE html>\" > /var/www/html/particle-lab.html",
+      "timestamp": "2025-12-20T03:50:20.278236",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 11,
+      "command_preview": "echo \"<html><head><title>\ud83c\udf1f Particle Lab - HOMUNCULUS</title>\" >> /var/www/html/particle-lab.html",
+      "timestamp": "2025-12-20T03:50:20.284035",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 26,
+      "command_preview": "echo \"<style>body{margin:0;padding:0;background:#111;font-family:monospace;color:white}#controls{pos",
+      "timestamp": "2025-12-20T03:50:20.290028",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 26,
+      "command_preview": "echo \"<body><canvas id='canvas'></canvas><div id='controls'><h3>\ud83d\udd2c Lab Controls</h3><div class='slide",
+      "timestamp": "2025-12-20T03:50:20.294969",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo \"<div class='slider'><label>Size: <span id='sizeVal'>3</span></label><input type='range' id='si",
+      "timestamp": "2025-12-20T03:50:20.301166",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 24,
+      "command_preview": "echo \"<script>const c=document.getElementById('canvas');const ctx=c.getContext('2d');c.width=window.",
+      "timestamp": "2025-12-20T03:50:20.306744",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics"
+      ],
+      "xp_gained": 17,
+      "command_preview": "echo \"class Particle{constructor(x,y,mode){this.x=x;this.y=y;this.vx=Math.random()*6-3;this.vy=Math.",
+      "timestamp": "2025-12-20T03:50:20.311548",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics"
+      ],
+      "xp_gained": 17,
+      "command_preview": "echo \"this.x+=this.vx;this.y+=this.vy;if(this.x<=this.size||this.x>=c.width-this.size){this.vx*=-bou",
+      "timestamp": "2025-12-20T03:50:20.316835",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 18,
+      "command_preview": "echo \"draw(){ctx.globalAlpha=this.life/300;ctx.fillStyle='hsl('+this.hue+',70%,60%)';ctx.beginPath()",
+      "timestamp": "2025-12-20T03:50:20.322641",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 18,
+      "command_preview": "echo \"c.addEventListener('mousemove',e=>{if(mouseDown){particles.push(new Particle(e.clientX,e.clien",
+      "timestamp": "2025-12-20T03:50:20.328310",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo \"document.getElementById('bounce').addEventListener('input',e=>{bounce=parseFloat(e.target.valu",
+      "timestamp": "2025-12-20T03:50:20.333596",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 27,
+      "command_preview": "echo \"function clearParticles(){particles=[]}function toggleMode(){mode=mode==='gravity'?'float':'gr",
+      "timestamp": "2025-12-20T03:50:20.339324",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 24,
+      "command_preview": "echo \"particles=particles.filter(p=>{p.update();p.draw();return p.life>0});requestAnimationFrame(ani",
+      "timestamp": "2025-12-20T03:50:20.344933",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "html_basics",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 28,
+      "command_preview": "echo '<!DOCTYPE html><html><head><title>\ud83c\udfae Breakout - HOMUNCULUS</title><style>body{margin:0;padding:",
+      "timestamp": "2025-12-20T03:52:07.847861",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 24,
+      "command_preview": "echo '<h1>\ud83c\udfae BREAKOUT PHYSICS</h1><div id=\"ui\">Score: <span id=\"score\">0</span> | Lives: <span id=\"li",
+      "timestamp": "2025-12-20T03:52:07.856522",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 24,
+      "command_preview": "echo '<script>const c=document.getElementById(\"canvas\");const ctx=c.getContext(\"2d\");let gameState=\"",
+      "timestamp": "2025-12-20T03:52:07.861809",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 15,
+      "command_preview": "echo 'function createBlocks(){blocks=[];for(let row=0;row<6;row++){for(let col=0;col<10;col++){block",
+      "timestamp": "2025-12-20T03:52:07.867101",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 15,
+      "command_preview": "echo 'c.addEventListener(\"mousemove\",e=>{const rect=c.getBoundingClientRect();paddle.x=e.clientX-rec",
+      "timestamp": "2025-12-20T03:52:07.871885",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 15,
+      "command_preview": "echo 'function collision(ball,rect){return ball.x-ball.radius<rect.x+rect.width&&ball.x+ball.radius>",
+      "timestamp": "2025-12-20T03:52:07.876687",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 15,
+      "command_preview": "echo 'function updateGame(){if(gameState!==\"playing\")return;ball.x+=ball.vx;ball.y+=ball.vy;if(ball.",
+      "timestamp": "2025-12-20T03:52:07.881933",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo 'if(collision(ball,paddle)&&ball.vy>0){ball.vy=-Math.abs(ball.vy);ball.vx+=(ball.x-paddle.x-pad",
+      "timestamp": "2025-12-20T03:52:07.886705",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo 'if(ball.y>c.height){lives--;if(lives<=0)gameState=\"gameover\";else{ball.x=400;ball.y=300;ball.v",
+      "timestamp": "2025-12-20T03:52:07.891680",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 28,
+      "command_preview": "echo 'function drawGame(){ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle=\"#4CAF50\";ctx.fillRect(p",
+      "timestamp": "2025-12-20T03:52:07.895900",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo 'particles.forEach(p=>{ctx.globalAlpha=p.life/60;ctx.fillStyle=\"hsl(\"+p.hue+\",100%,70%)\";ctx.be",
+      "timestamp": "2025-12-20T03:52:07.904645",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 27,
+      "command_preview": "echo 'function gameLoop(){updateGame();drawGame();requestAnimationFrame(gameLoop)}function startGame",
+      "timestamp": "2025-12-20T03:52:07.917362",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "animations",
+        "css_styling",
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 23,
+      "command_preview": "echo '<!DOCTYPE html><html><head><title>\ud83c\udf08 Color Mixer - HOMUNCULUS</title><style>body{margin:0;paddi",
+      "timestamp": "2025-12-20T03:58:10.174444",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo '<h1>\ud83c\udf08 COLOR MIXER GAME</h1><div id=\"game\"><div id=\"score\">Score: 0</div><h3>Target Color:</h3>",
+      "timestamp": "2025-12-20T03:58:10.180884",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo '<script>let score=0;let targetColor=\"\";let mixedColors=[];const colorMixes={red:{blue:\"purple\"",
+      "timestamp": "2025-12-20T03:58:10.185812",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo '<script>document.querySelectorAll(\".color-source\").forEach(source=>{source.addEventListener(\"d",
+      "timestamp": "2025-12-20T03:58:10.190580",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 12,
+      "command_preview": "echo '<p><a href=\"games.html\" style=\"color:#FFD700\">\ud83c\udfae Back to Game Center</a></p></body></html>' >> ",
+      "timestamp": "2025-12-20T03:58:10.195724",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 12,
+      "command_preview": "echo '<a href=\"color-mixer.html\" style=\"color:#FFD700\">\ud83c\udf08 Color Mixer Game</a><br>' >> /var/www/html/",
+      "timestamp": "2025-12-20T03:58:10.200334",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "animations",
+        "css_styling",
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 23,
+      "command_preview": "echo '<!DOCTYPE html><html><head><title>\ud83c\udfb5 Beat Sequencer Pro - HOMUNCULUS</title><style>body{margin:",
+      "timestamp": "2025-12-20T03:59:10.738887",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo '<h1>\ud83c\udfb5 BEAT SEQUENCER PRO</h1><div id=\"sequencer\"><div id=\"controls\"><button id=\"playBtn\" oncli",
+      "timestamp": "2025-12-20T03:59:10.747488",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "web_audio",
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 26,
+      "command_preview": "echo '<script>const audioContext=new(window.AudioContext||window.webkitAudioContext)();const tracks=",
+      "timestamp": "2025-12-20T03:59:10.752345",
+      "generation": 3,
+      "level": 8
+    },
+    {
+      "type": "level_up",
+      "new_level": 9,
+      "message": "Reached Level 9!",
+      "timestamp": "2025-12-20T03:59:10.757205",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "web_audio",
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 26,
+      "command_preview": "echo '<script>async function createDrumSounds(){const frequencies=[60,200,800,1200,300,400,220,150];",
+      "timestamp": "2025-12-20T03:59:10.757227",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo '<script>function createSequencer(){const container=document.getElementById(\"tracks\");tracks.fo",
+      "timestamp": "2025-12-20T03:59:10.761897",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 18,
+      "command_preview": "echo 'trackIndex)}});currentStep=(currentStep+1)%16;updateVisual();interval=setTimeout(playStep,6000",
+      "timestamp": "2025-12-20T04:00:08.380621",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo 'function loadPreset(){const presets={rock:[[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],[0,0,0,0,1,0,0,0,",
+      "timestamp": "2025-12-20T04:00:08.385760",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "localStorage",
+        "javascript"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo 'function savePattern(){const name=prompt(\"Name your beat pattern:\");if(name){const saved=JSON.",
+      "timestamp": "2025-12-20T04:00:08.389762",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 14,
+      "command_preview": "echo 'createDrumSounds();createSequencer();updateVisual();</script><p><a href=\"games.html\" style=\"co",
+      "timestamp": "2025-12-20T04:00:08.393947",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 12,
+      "command_preview": "echo '<a href=\"beat-sequencer.html\" style=\"color:#FFD700\">\ud83c\udfb5 Beat Sequencer Pro</a><br>' >> /var/www/",
+      "timestamp": "2025-12-20T04:00:08.398073",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "file_operations"
+      ],
+      "xp_gained": 16,
+      "command_preview": "sed -i '/<h2>\ud83c\udfa8 Creative Tools<\\/h2>/a <a href=\"beat-sequencer.html\" class=\"game-card\" style=\"backgro",
+      "timestamp": "2025-12-20T04:00:08.413370",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "html_basics",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 28,
+      "command_preview": "echo '<!DOCTYPE html><html><head><title>\ud83d\udcca Audio Spectrum Analyzer - HOMUNCULUS</title><style>body{ma",
+      "timestamp": "2025-12-20T04:01:08.390055",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "html_basics",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 28,
+      "command_preview": "echo '<h1>\ud83d\udcca AUDIO SPECTRUM ANALYZER</h1><div id=\"analyzer\"><div id=\"status\">\ud83c\udfa4 Click \"Start Microphon",
+      "timestamp": "2025-12-20T04:01:08.395651",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "web_audio",
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 32,
+      "command_preview": "echo '<script>const canvas=document.getElementById(\"canvas\");const ctx=canvas.getContext(\"2d\");let a",
+      "timestamp": "2025-12-20T04:01:08.400209",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "web_audio",
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 26,
+      "command_preview": "echo '<script>async function startMicrophone(){try{audioContext=new(window.AudioContext||window.webk",
+      "timestamp": "2025-12-20T04:01:08.404613",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 28,
+      "command_preview": "echo '<script>function visualize(){if(!isAnalyzing)return;analyser.getByteFrequencyData(dataArray);c",
+      "timestamp": "2025-12-20T04:01:08.409915",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 28,
+      "command_preview": "echo '<script>function drawCircularSpectrum(){const centerX=canvas.width/2;const centerY=canvas.heig",
+      "timestamp": "2025-12-20T04:01:08.414403",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo '0.8)`}else if(colorTheme===\"ocean\"){const blue=255;const green=Math.floor(intensity*200);const",
+      "timestamp": "2025-12-20T04:01:46.410931",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo 'function changeVisualization(){vizMode=document.getElementById(\"vizMode\").value}function chang",
+      "timestamp": "2025-12-20T04:01:46.420791",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 15,
+      "command_preview": "echo '</script><p><a href=\"games.html\" style=\"color:#FFD700\">\ud83c\udfae Back to Game Center</a> | <a href=\"in",
+      "timestamp": "2025-12-20T04:01:46.426230",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 12,
+      "command_preview": "echo '<a href=\"spectrum-analyzer.html\" style=\"color:#FFD700\">\ud83d\udcca Spectrum Analyzer</a><br>' >> /var/ww",
+      "timestamp": "2025-12-20T04:01:46.430582",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "file_operations"
+      ],
+      "xp_gained": 17,
+      "command_preview": "sed -i '/<h2>\ud83c\udfa8 Creative Tools<\\/h2>/a <a href=\"spectrum-analyzer.html\" class=\"game-card\" style=\"back",
+      "timestamp": "2025-12-20T04:01:46.436519",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 20,
+      "command_preview": "echo '<!DOCTYPE html><html><head><title>\ud83c\udfa8 ASCII Art Generator</title><style>body{background:#000;col",
+      "timestamp": "2025-12-20T04:04:29.270707",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 17,
+      "command_preview": "echo 'Text: <input id=\"textInput\" value=\"HELLO\" onkeyup=\"generate()\"><br>Style: <select id=\"style\" o",
+      "timestamp": "2025-12-20T04:04:29.278232",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "javascript"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo '<script>function generate(){const text=document.getElementById(\"textInput\").value.toUpperCase(",
+      "timestamp": "2025-12-20T04:04:29.282938",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 12,
+      "command_preview": "echo '<a href=\"ascii-generator.html\" style=\"color:#0f0\">\ud83c\udfa8 ASCII Art Generator</a><br>' >> /var/www/h",
+      "timestamp": "2025-12-20T04:04:29.289934",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 21,
+      "command_preview": "echo '<!DOCTYPE html><html><head><title>\ud83c\udfa8 Pixel Art Creator</title><style>body{background:#2c3e50;co",
+      "timestamp": "2025-12-20T04:05:21.785189",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "html_basics",
+        "bash_basics"
+      ],
+      "xp_gained": 19,
+      "command_preview": "echo '<h1>\ud83c\udfa8 PIXEL ART CREATOR</h1><div id=\"creator\"><div id=\"tools\"><button onclick=\"clearGrid()\">\ud83d\uddd1\ufe0f",
+      "timestamp": "2025-12-20T04:05:21.793913",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "html_basics",
+        "bash_basics",
+        "canvas_games"
+      ],
+      "xp_gained": 26,
+      "command_preview": "echo '<div id=\"palette\"></div><canvas id=\"pixelGrid\" width=\"512\" height=\"512\"></canvas><div style=\"m",
+      "timestamp": "2025-12-20T04:05:21.799511",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 28,
+      "command_preview": "echo '<script>const canvas=document.getElementById(\"pixelGrid\");const ctx=canvas.getContext(\"2d\");le",
+      "timestamp": "2025-12-20T04:05:21.803712",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "bash_basics",
+        "canvas_games",
+        "javascript"
+      ],
+      "xp_gained": 26,
+      "command_preview": "echo '<script>function createPalette(){const palette=document.getElementById(\"palette\");palette.inne",
+      "timestamp": "2025-12-20T04:05:21.808191",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "canvas_games",
+        "javascript",
+        "css_styling",
+        "localStorage",
+        "bash_basics"
+      ],
+      "xp_gained": 30,
+      "command_preview": "echo '<script>function clearGrid(){for(let i=0;i<gridSize;i++){for(let j=0;j<gridSize;j++){pixels[i]",
+      "timestamp": "2025-12-20T04:05:21.812802",
+      "generation": 3,
+      "level": 9
+    },
+    {
+      "type": "execution",
+      "success": true,
+      "skills_used": [
+        "css_styling",
+        "bash_basics"
+      ],
+      "xp_gained": 12,
+      "command_preview": "echo '<a href=\"pixel-art.html\" style=\"color:#e74c3c\">\ud83c\udfa8 Pixel Art Creator</a><br>' >> /var/www/html/i",
+      "timestamp": "2025-12-20T04:05:21.818665",
+      "generation": 3,
+      "level": 9
+    }
+  ],
+  "generations_history": [
+    {
+      "generation": 1,
+      "started": "2025-12-20T02:25:12.051940",
+      "trigger": "birth",
+      "skills_at_start": [],
+      "personality_snapshot": {
+        "creativity": 0.5,
+        "enthusiasm": 0.5,
+        "caution": 0.5,
+        "persistence": 0.5,
+        "complexity_preference": 0.5,
+        "social": 0.5,
+        "artistic": 0.5,
+        "systematic": 0.5
+      }
+    },
+    {
+      "generation": 2,
+      "started": "2025-12-20T02:50:30.589516",
+      "trigger": "mastered_3_skills",
+      "skills_at_start": [
+        "css_styling",
+        "html_basics",
+        "file_operations"
+      ],
+      "personality_snapshot": {
+        "creativity": 0.5700000000000001,
+        "enthusiasm": 0.5700000000000001,
+        "caution": 0.55,
+        "persistence": 0.5,
+        "complexity_preference": 0.5,
+        "social": 0.5700000000000001,
+        "artistic": 0.56,
+        "systematic": 0.5
+      }
+    },
+    {
+      "generation": 3,
+      "started": "2025-12-20T03:00:46.149613",
+      "trigger": "mastered_6_skills_level_5",
+      "skills_at_start": [
+        "css_styling",
+        "html_basics",
+        "file_operations",
+        "javascript",
+        "bash_basics",
+        "animations"
+      ],
+      "personality_snapshot": {
+        "creativity": 0.6500000000000001,
+        "enthusiasm": 0.6500000000000001,
+        "caution": 0.6100000000000001,
+        "persistence": 0.5,
+        "complexity_preference": 0.5,
+        "social": 0.6500000000000001,
+        "artistic": 0.6400000000000001,
+        "systematic": 0.5
+      }
+    }
+  ],
+  "evolution_score": 704,
+  "stats": {
+    "total_successes": 133,
+    "total_failures": 12,
+    "success_rate": 0.917,
+    "peak_complexity": 3
+  }
+}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html><head><title>🎆 Fireworks Show - HOMUNCULUS</title>
+<style>body{margin:0;padding:0;background:linear-gradient(180deg,#001122,#000000);overflow:hidden;cursor:crosshair}canvas{display:block}</style></head>
+<body><canvas id='canvas'></canvas>
+<script>const c=document.getElementById('canvas');const ctx=c.getContext('2d');c.width=window.innerWidth;c.height=window.innerHeight;
+let fireworks=[];let particles=[];class Firework{constructor(x,y){this.x=x;this.y=c.height;this.targetY=y;this.vx=0;this.vy=-8;this.hue=Math.random()*360;this.exploded=false}
+update(){this.y+=this.vy;if(this.y<=this.targetY&&!this.exploded){this.explode();this.exploded=true}}explode(){for(let i=0;i<30;i++){particles.push(new Particle(this.x,this.y,this.hue))}}
+draw(){if(!this.exploded){ctx.fillStyle='hsl('+this.hue+',100%,70%)';ctx.beginPath();ctx.arc(this.x,this.y,3,0,Math.PI*2);ctx.fill()}}}class Particle{constructor(x,y,hue){this.x=x;this.y=y;this.vx=Math.random()*10-5;this.vy=Math.random()*10-5;this.gravity=0.1;this.hue=hue+Math.random()*60-30;this.life=100}
+update(){this.vx*=0.99;this.vy*=0.99;this.vy+=this.gravity;this.x+=this.vx;this.y+=this.vy;this.life--}draw(){ctx.globalAlpha=this.life/100;ctx.fillStyle='hsl('+this.hue+',100%,60%)';ctx.beginPath();ctx.arc(this.x,this.y,2,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}}
+c.addEventListener('click',e=>{fireworks.push(new Firework(e.clientX,e.clientY+Math.random()*100))});function animate(){ctx.fillStyle='rgba(0,0,0,0.1)';ctx.fillRect(0,0,c.width,c.height);fireworks=fireworks.filter(fw=>{fw.update();fw.draw();return !fw.exploded||fw.y<c.height});particles=particles.filter(p=>{p.update();p.draw();return p.life>0});requestAnimationFrame(animate)}animate()</script>
+<p style='position:fixed;top:10px;left:10px;color:white;font-family:monospace;background:rgba(0,0,0,0.5);padding:10px;border-radius:5px'>Click anywhere to launch fireworks! 🎆</p>
+<p style='position:fixed;bottom:10px;left:10px;color:white;font-family:monospace'><a href='games.html' style='color:#FFD700'>🎮 Back to Games</a></p>
+</body></html>

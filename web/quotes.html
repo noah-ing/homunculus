@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Quote Generator - HOMUNCULUS</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.95);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        #quote {
+            font-size: 24px;
+            font-style: italic;
+            color: #555;
+            margin: 30px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.5;
+        }
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .home-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-link">← Home</a>
+    
+    <div class="container">
+        <h1>💭 Daily Quote Generator</h1>
+        <div id="quote">"The best time to plant a tree was 20 years ago. The second best time is now."</div>
+        <button onclick="getNewQuote()">Get New Quote ✨</button>
+    </div>
+
+    <script>
+        const quotes = [
+            "The best time to plant a tree was 20 years ago. The second best time is now.",
+            "Your limitation—it's only your imagination.",
+            "Push yourself, because no one else is going to do it for you.",
+            "Great things never come from comfort zones.",
+            "Dream it. Wish it. Do it.",
+            "Success doesn't just find you. You have to go out and get it.",
+            "The harder you work for something, the greater you'll feel when you achieve it.",
+            "Dream bigger. Do bigger.",
+            "Don't stop when you're tired. Stop when you're done.",
+            "Wake up with determination. Go to bed with satisfaction.",
+            "Do something today that your future self will thank you for.",
+            "Little things make big days.",
+            "It's going to be hard, but hard does not mean impossible.",
+            "Don't wait for opportunity. Create it.",
+            "Sometimes we're tested not to show our weaknesses, but to discover our strengths."
+        ];
+        
+        function getNewQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById('quote').textContent = '"' + quotes[randomIndex] + '"';
+        }
+    </script>
+</body>
+</html>

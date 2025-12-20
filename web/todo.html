@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple To-Do List!</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .task {
+            background: #f9f9f9;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .task.done {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .delete-btn {
+            background: #ff4757;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Simple To-Do List!</h1>
+        <div>
+            <input type="text" id="taskInput" placeholder="What do you need to do?">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <div id="taskList"></div>
+        <p><a href="/">← Back to Home</a></p>
+    </div>
+
+    <script>
+        let tasks = [];
+
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const task = input.value.trim();
+            if (task) {
+                tasks.push({text: task, done: false});
+                input.value = '';
+                renderTasks();
+            }
+        }
+
+        function toggleTask(index) {
+            tasks[index].done = !tasks[index].done;
+            renderTasks();
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            renderTasks();
+        }
+
+        function renderTasks() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+            
+            tasks.forEach((task, index) => {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task' + (task.done ? ' done' : '');
+                taskDiv.innerHTML = `
+                    <span onclick="toggleTask(${index})">${task.text}</span>
+                    <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
+                `;
+                taskList.appendChild(taskDiv);
+            });
+        }
+    </script>
+</body>
+</html>

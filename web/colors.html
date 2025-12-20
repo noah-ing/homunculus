@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Color Tool</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .color-container {
+            background: white;
+            color: #333;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            max-width: 400px;
+        }
+        .color-circle {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            border-radius: 50%;
+            border: 3px solid #ddd;
+            background: #ff6b9d;
+        }
+        .color-code {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .links {
+            margin-top: 30px;
+        }
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="color-container">
+        <h1>Color Tool</h1>
+        <div class="color-circle" id="colorCircle"></div>
+        <div class="color-code" id="colorCode">#FF6B9D</div>
+        <button onclick="randomColor()">Random Color</button>
+        <div class="links">
+            <a href="/">Home</a> |
+            <a href="guess.html">Guess</a> |
+            <a href="calc.html">Calc</a>
+        </div>
+    </div>
+    <script>
+        function randomColor() {
+            const colors = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += colors[Math.floor(Math.random() * colors.length)];
+            }
+            document.getElementById('colorCircle').style.background = color;
+            document.getElementById('colorCode').textContent = color;
+        }
+    </script>
+</body>
+</html>

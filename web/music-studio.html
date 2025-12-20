@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Homunculus Music Studio</title>
+<style>
+body { background: linear-gradient(45deg, #1e3c72, #2a5298, #764ba2); color: white; font-family: Arial; text-align: center; padding: 20px; min-height: 100vh; animation: bg-shift 10s infinite; }
+@keyframes bg-shift { 0%, 100% { background: linear-gradient(45deg, #1e3c72, #2a5298, #764ba2); } 50% { background: linear-gradient(45deg, #764ba2, #667eea, #1e3c72); } }
+h1 { font-size: 3rem; text-shadow: 3px 3px 6px rgba(0,0,0,0.5); margin-bottom: 10px; }
+.subtitle { font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9; }
+.studio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+.tool-card { background: rgba(255,255,255,0.15); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.2); transition: all 0.3s; position: relative; overflow: hidden; }
+.tool-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.3); background: rgba(255,255,255,0.25); }
+.tool-card::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); transform: rotate(45deg); transition: all 0.5s; opacity: 0; }
+.tool-card:hover::before { opacity: 1; animation: shine 0.8s ease-in-out; }
+@keyframes shine { 0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); } 100% { transform: translateX(100%) translateY(100%) rotate(45deg); } }
+.tool-icon { font-size: 4rem; margin-bottom: 20px; display: block; }
+.tool-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; }
+.tool-desc { margin-bottom: 25px; opacity: 0.9; line-height: 1.4; }
+.launch-btn { background: linear-gradient(45deg, #ff6b6b, #ff8e8e); border: none; padding: 12px 30px; border-radius: 25px; color: white; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; }
+.launch-btn:hover { background: linear-gradient(45deg, #ff5252, #ff7979); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(255,107,107,0.4); }
+.combo-section { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 25px; margin: 40px auto; max-width: 800px; }
+.combo-title { font-size: 1.8rem; margin-bottom: 15px; color: #ffd700; }
+.quick-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
+.quick-btn { background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.3); padding: 10px 20px; border-radius: 20px; color: white; text-decoration: none; transition: all 0.3s; }
+.quick-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+</style>
+</head>
+<body>
+<h1>🎵 HOMUNCULUS MUSIC STUDIO 🎵</h1>
+<p class="subtitle">Complete Digital Music Creation Suite - Built by AI!</p>
+
+<div class="studio-grid">
+<div class="tool-card">
+<span class="tool-icon">🥁</span>
+<div class="tool-title">Beat Maker</div>
+<div class="tool-desc">Create powerful drum beats with kick, snare, hi-hat, and clap sounds. Perfect for laying down the rhythm foundation!</div>
+<a href="beats.html" class="launch-btn">Launch Beat Maker</a>
+</div>
+
+<div class="tool-card">
+<span class="tool-icon">🎹</span>
+<div class="tool-title">Melody Maker</div>
+<div class="tool-desc">Play beautiful melodies on a full chromatic piano with multiple waveforms. Express your musical creativity!</div>
+<a href="melody.html" class="launch-btn">Launch Melody Maker</a>
+</div>
+
+<div class="tool-card">
+<span class="tool-icon">🎤</span>
+<div class="tool-title">Sound Board</div>
+<div class="tool-desc">Quick access to various sound effects and audio samples. Add personality to your compositions!</div>
+<a href="sounds.html" class="launch-btn">Launch Sound Board</a>
+</div>
+</div>
+
+<div class="combo-section">
+<div class="combo-title">🎼 CREATE COMPLETE SONGS! 🎼</div>
+<p>Pro Tip: Open multiple tools in different tabs to create full musical arrangements!</p>
+<p>🎯 Try This: Start with Beat Maker for rhythm → Add Melody Maker for tune → Use Sound Board for effects!</p>
+<div class="quick-actions">
+<a href="beats.html" target="_blank" class="quick-btn">🥁 Beats</a>
+<a href="melody.html" target="_blank" class="quick-btn">🎹 Melody</a>
+<a href="sounds.html" target="_blank" class="quick-btn">🎤 Sounds</a>
+</div>
+</div>
+
+<p style="margin-top: 40px; opacity: 0.8;">✨ All tools use advanced Web Audio API for high-quality sound generation ✨</p>
+</body>
+</html>

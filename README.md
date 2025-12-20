@@ -30,11 +30,13 @@
 ### ✨ Key Features
 
 - **🧠 Dual-AI Architecture** — Brain (executive) and Child (creative) instances collaborate via structured JSON messaging
+- **🧬 Evolution System** — AI evolves through generations, gains XP, masters skills, and develops personality traits
 - **🔄 Autonomous Operation** — Runs continuously, proposing and implementing features without human intervention
 - **🛡️ Built-in Safety** — Command filtering, resource monitoring, and execution guardrails
 - **📺 Live Transparency** — Watch the AI work in real-time via terminal streaming
 - **💾 Persistent Memory** — Remembers what it built across restarts
 - **🎮 Self-Generated Content** — Games, art, utilities—all created by the AI itself
+- **📈 Adaptive Learning** — Learns which commands work (cat: 100%) vs fail (sed: 44%)
 
 ### 🏆 What Makes This Special
 
@@ -166,6 +168,40 @@ Each iteration follows this cycle:
 }
 ```
 
+### 🧬 Evolution System
+
+The AI doesn't just build—it **evolves**. Each successful feature grants XP, unlocks skills, and shapes personality.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    EVOLUTION PROGRESSION                     │
+│                                                             │
+│  Generation 1 ──► Generation 2 ──► Generation 3 ──► ...    │
+│  (Basic HTML)    (JavaScript)     (Canvas/Audio)           │
+│                                                             │
+│  Skills Unlock:                                             │
+│  html_basics → css_styling → javascript → canvas_games     │
+│                                         → web_audio        │
+│                                         → animations       │
+│                                                             │
+│  Personality Emerges:                                       │
+│  creativity: 0.5 → 0.7    enthusiasm: 0.5 → 0.8            │
+│  artistic: 0.5 → 0.6      social: 0.5 → 0.55               │
+└─────────────────────────────────────────────────────────────┘
+```
+
+#### Sample Evolution Stats (After ~2 hours)
+```
+Generation: 3
+Level: 9
+XP: 2,873
+Mastered Skills: 10 (html, css, js, canvas, web_audio, animations, localStorage...)
+Apps Built: 30+
+Command Success: cat 100%, echo 100%, sed 44%
+```
+
+The AI learns from failures—after sed commands failed repeatedly, it adapted to use `cat` and `echo` with 100% success.
+
 ### Safety Guardrails
 
 The Brain enforces multiple safety layers:
@@ -239,17 +275,20 @@ homunculus/
 ├── 📄 README.md                # This file
 │
 ├── 📁 scripts/
-│   ├── 🐍 brain_child_loop.py  # Core autonomous loop (500+ lines)
+│   ├── 🐍 brain_child_loop.py  # Core autonomous loop (600+ lines)
+│   ├── 🧬 evolution.py         # Evolution engine (700+ lines)
 │   ├── 🔧 setup_web.sh         # Service initialization
 │   ├── 🔧 supervisor.sh        # Health monitoring & restart
 │   └── 📜 api_server.js        # Visitor tracking API
 │
 ├── 📁 web/
 │   ├── 🌐 index.html           # Main dashboard
-│   └── 🎮 games/               # AI-generated games
+│   ├── 📈 evolution.html       # Evolution timeline visualization
+│   └── 🎮 games/               # AI-generated games (30+ apps)
 │
 ├── 📁 data/                    # Mounted: persistent storage
-│   └── 💾 memory.json          # AI's long-term memory
+│   ├── 💾 memory.json          # AI's long-term memory
+│   └── 🧬 evolution.json       # Evolution state (XP, skills, personality)
 │
 └── 📁 logs/                    # Mounted: activity logs
     ├── 📋 activity.log         # Human-readable log
@@ -458,11 +497,14 @@ docker exec homunculus-vm truncate -s 10M /home/computeruse/logs/activity.log
 
 ### Current Features ✅
 - [x] Brain-Child autonomous loop
+- [x] **Evolution system** (generations, XP, skills, personality)
 - [x] Live terminal streaming
 - [x] Visitor tracking API
 - [x] Persistent memory system
 - [x] Safety guardrails
 - [x] Service supervisor
+- [x] **30+ AI-generated apps** (games, tools, audio visualizers)
+- [x] Adaptive command learning (avoids failing patterns)
 
 ### Planned Features 🚧
 - [ ] Web-based control panel

@@ -18,7 +18,6 @@
             --accent-green: #00ff88;
             --accent-blue: #00d4ff;
             --accent-purple: #a855f7;
-<div style="background: linear-gradient(90deg, #00ff88, #4ecdc4, #ff6b6b, #ffd93d); text-align: center; padding: 15px; color: white; font-weight: bold; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,255,136,0.3);">✨ Welcome to the HOMUNCULUS Arcade - Built by Brain-Child AI Collaboration! ✨</div>
             --accent-red: #ff6b6b;
             --accent-yellow: #ffd93d;
             --border: rgba(255, 255, 255, 0.1);
@@ -159,6 +158,45 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-top: 5px;
+        }
+
+        /* AI Games Section */
+        .ai-games {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .ai-games h3 {
+            color: var(--accent-green);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .games-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .game-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .game-link:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.2);
         }
 
         /* Main Grid */
@@ -303,13 +341,6 @@
             font-size: 1.2rem;
         }
 
-        /* Next Task */
-        .next-task {
-            font-family: 'Fira Code', monospace;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
         /* Footer */
         .footer {
             text-align: center;
@@ -414,6 +445,36 @@
             </div>
         </div>
 
+        <!-- AI-Built Features -->
+        <div class="ai-games">
+            <h3>Features Built by AI (Gen 3, Level 7) - 25+ Apps!</h3>
+            <div class="games-grid">
+                <a href="games/rainbow-snake.html" class="game-link">🐍 Snake</a>
+                <a href="dice.html" class="game-link">🎲 Dice</a>
+                <a href="magic8ball.html" class="game-link">🔮 8-Ball</a>
+                <a href="colors.html" class="game-link">🎨 Colors</a>
+                <a href="sounds.html" class="game-link">🎵 Sounds</a>
+                <a href="quotes.html" class="game-link">💬 Quotes</a>
+                <a href="todo.html" class="game-link">📝 Todo</a>
+                <a href="timer.html" class="game-link">⏱️ Timer</a>
+                <a href="draw.html" class="game-link">🖌️ Draw</a>
+                <a href="calc.html" class="game-link">🧮 Calc</a>
+                <a href="guess.html" class="game-link">🎯 Guess</a>
+                <a href="beats.html" class="game-link">🥁 Beats</a>
+                <a href="coin-flip.html" class="game-link">🪙 Coin</a>
+                <a href="melody.html" class="game-link">🎹 Melody</a>
+                <a href="ascii-art.html" class="game-link">🎨 ASCII</a>
+                <a href="rainbow.html" class="game-link">🌈 Rainbow</a>
+                <a href="palette.html" class="game-link">🖼️ Palette</a>
+                <a href="random.html" class="game-link">🔢 Random</a>
+                <a href="colorpicker.html" class="game-link">🎯 Picker</a>
+                <a href="memory-game.html" class="game-link">🧠 Memory</a>
+                <a href="music-studio.html" class="game-link">🎶 Studio</a>
+                <a href="visual-music.html" class="game-link">🎼 Visual</a>
+                <a href="evolution.html" class="game-link">📈 Evolution</a>
+            </div>
+        </div>
+
         <div class="main-grid">
             <!-- Terminal Card -->
             <div class="card terminal-card">
@@ -450,30 +511,12 @@
                 </div>
                 <div class="card-content">
                     <ul class="features-list" id="features-list">
-                        <li>
-                            <a href="/terminal/">
-                                <span class="icon">📺</span>
-                                <span>Live Terminal Stream</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" onclick="alert('Coming soon! The AI is still building...')">
-                                <span class="icon">📝</span>
-                                <span>Guestbook (Coming Soon)</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" onclick="alert('Coming soon! The AI is still building...')">
-                                <span class="icon">🎨</span>
-                                <span>ASCII Gallery (Coming Soon)</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" onclick="alert('Coming soon! The AI is still building...')">
-                                <span class="icon">🎲</span>
-                                <span>Games (Coming Soon)</span>
-                            </a>
-                        </li>
+                        <li><a href="/terminal/"><span class="icon">📺</span><span>Live Terminal</span></a></li>
+                        <li><a href="games/rainbow-snake.html"><span class="icon">🐍</span><span>Rainbow Snake</span></a></li>
+                        <li><a href="sounds.html"><span class="icon">🎵</span><span>Sound Board</span></a></li>
+                        <li><a href="calc.html"><span class="icon">🧮</span><span>Calculator</span></a></li>
+                        <li><a href="guess.html"><span class="icon">🎯</span><span>Guessing Game</span></a></li>
+                        <li><a href="draw.html"><span class="icon">🖌️</span><span>Drawing Pad</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -496,28 +539,20 @@
     </div>
 
     <script>
-        // Configuration
         const API_BASE = '/api';
         let startTime = Date.now();
         let lastStatsFetch = Date.now();
         let statsData = {};
 
-        // Fetch visitor count and show welcome message
         async function initVisitor() {
             try {
                 const response = await fetch(`${API_BASE}/visit`);
                 const data = await response.json();
-
                 document.getElementById('visitor-count').textContent = data.count;
-
-                // Show welcome popup
                 const popup = document.getElementById('visitor-popup');
                 document.getElementById('popup-title').textContent = `Welcome, Visitor #${data.count}!`;
                 document.getElementById('popup-message').textContent = data.message || 'Thanks for stopping by!';
-
                 popup.classList.add('show');
-
-                // Hide after 5 seconds
                 setTimeout(() => popup.classList.remove('show'), 5000);
             } catch (error) {
                 console.error('Failed to fetch visitor count:', error);
@@ -525,19 +560,15 @@
             }
         }
 
-        // Fetch stats
         async function updateStats() {
             try {
                 const response = await fetch(`${API_BASE}/stats`);
                 statsData = await response.json();
                 lastStatsFetch = Date.now();
-
                 document.getElementById('iterations').textContent = statsData.iterations || 0;
                 document.getElementById('features-count').textContent = statsData.features_built || 0;
                 document.getElementById('status-text').textContent =
                     statsData.iterations > 0 ? 'AUTONOMOUS MODE ACTIVE' : 'INITIALIZING...';
-
-                // Update start time from server
                 if (statsData.uptime_start) {
                     startTime = new Date(statsData.uptime_start).getTime();
                 }
@@ -546,19 +577,15 @@
             }
         }
 
-        // Fetch activity log
         async function updateActivity() {
             try {
                 const response = await fetch(`${API_BASE}/activity`);
                 const activities = await response.json();
-
                 const logElement = document.getElementById('activity-log');
-
                 if (activities.length === 0) {
                     logElement.innerHTML = '<div class="activity-entry"><span class="activity-message">Waiting for activity...</span></div>';
                     return;
                 }
-
                 logElement.innerHTML = activities.map(activity => `
                     <div class="activity-entry ${activity.type || 'info'}">
                         <span class="activity-time">${activity.time}</span>
@@ -570,41 +597,57 @@
             }
         }
 
-        // Update uptime counter
         function updateUptime() {
-            let elapsed = (statsData.uptime_seconds || 0) + Math.floor((Date.now() - lastStatsFetch) / 1000); if (elapsed < 0) elapsed = 0;
+            let elapsed = (statsData.uptime_seconds || 0) + Math.floor((Date.now() - lastStatsFetch) / 1000);
+            if (elapsed < 0) elapsed = 0;
             const hours = Math.floor(elapsed / 3600);
             const minutes = Math.floor((elapsed % 3600) / 60);
             const seconds = elapsed % 60;
-
             document.getElementById('uptime').textContent =
                 `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
-        // Escape HTML to prevent XSS
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             initVisitor();
             updateStats();
             updateActivity();
-
-            // Update uptime every second
             setInterval(updateUptime, 1000);
-
-            // Update stats every 10 seconds
             setInterval(updateStats, 10000);
-
-            // Update activity every 5 seconds
             setInterval(updateActivity, 5000);
         });
     </script>
-    <div style="text-align: center; margin: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">        <a href="games/rainbow-snake.html" style="color: #ff6b6b; text-decoration: none; font-size: 1.5rem; font-weight: bold;">🎮 Play Rainbow Snake Game! 🌈</a>    </div>
 </body>
 </html>
-<div style="text-align:center; margin:50px 0 20px 0; padding:20px; border-top:1px solid #333; color:#666; font-size:14px;">Built with 🧠❤️ by the HOMUNCULUS Brain-Child AI System</div>
+        <a href="sounds.html" class="feature-card">
+            🎵 Sound Board
+            <span>Make fun sounds with emoji buttons!</span>
+        </a>
+        <a href="palette.html" class="feature-card">
+            🎨 Color Palettes
+            <span>Beautiful color combinations to inspire you!</span>
+        </a>
+        <a href="dice-simple.html" class="feature-card">
+            🎲 Simple Dice
+            <span>Roll a virtual dice!</span>
+        </a>
+        <a href="coin-flip.html" class="feature-card">
+            🪙 Coin Flipper
+            <span>Flip a virtual coin - heads or tails!</span>
+        </a>
+<p><a href="beats.html">🥁 Beat Maker</a></p>
+<p><a href="melody.html">🎹 Melody Maker</a></p>
+<p><a href="music-studio.html">🎵 MUSIC STUDIO HUB</a></p>
+<p><a href="visual-music.html">🎨 Visual Music Canvas</a></p>
+<p><a href="ascii-art.html">🎨 ASCII Art Maker</a></p>
+<p><a href="games.html">🎮 GAME CENTER</a></p>
+<a href="color-mixer.html" style="color:#FFD700">🌈 Color Mixer Game</a><br>
+<a href="beat-sequencer.html" style="color:#FFD700">🎵 Beat Sequencer Pro</a><br>
+<a href="spectrum-analyzer.html" style="color:#FFD700">📊 Spectrum Analyzer</a><br>
+<a href="ascii-generator.html" style="color:#0f0">🎨 ASCII Art Generator</a><br>
+<a href="pixel-art.html" style="color:#e74c3c">🎨 Pixel Art Creator</a><br>

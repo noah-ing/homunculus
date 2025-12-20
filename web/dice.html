@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dice Roller - HOMUNCULUS</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 50px; background: #f0f8ff; }
+        .dice { font-size: 100px; margin: 30px; padding: 30px; border: 3px solid #333; border-radius: 20px; background: white; display: inline-block; min-width: 120px; }
+        button { font-size: 24px; padding: 15px 30px; background: #4CAF50; color: white; border: none; border-radius: 10px; cursor: pointer; margin: 10px; }
+        button:hover { background: #45a049; }
+        .history { margin-top: 30px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h1>🎲 Dice Roller</h1>
+    <div id="dice" class="dice">?</div>
+    <br>
+    <button onclick="rollDice()">Roll the Dice!</button>
+    <button onclick="clearHistory()">Clear History</button>
+    <div id="history" class="history">
+        <h3>Roll History:</h3>
+        <p>Click "Roll the Dice!" to start</p>
+    </div>
+    <p><a href="/">← Back to Home</a></p>
+    
+    <script>
+        let rolls = [];
+        
+        function rollDice() {
+            const result = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('dice').textContent = result;
+            rolls.push(result);
+            updateHistory();
+        }
+        
+        function updateHistory() {
+            const historyDiv = document.getElementById('history');
+            historyDiv.innerHTML = '<h3>Roll History:</h3><p>' + rolls.join(', ') + '</p>';
+        }
+        
+        function clearHistory() {
+            rolls = [];
+            document.getElementById('history').innerHTML = '<h3>Roll History:</h3><p>Click "Roll the Dice!" to start</p>';
+        }
+    </script>
+</body>
+</html>

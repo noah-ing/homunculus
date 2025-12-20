@@ -267,10 +267,21 @@ Your personality traits are EMERGING from your experiences.
 """
         # Adjust complexity guidance based on generation
         gen = evolution.data["generation"]
-        if gen >= 3:
-            child_system += "\nYou've evolved significantly - feel free to propose ADVANCED features!\n"
-        elif gen == 2:
-            child_system += "\nYou're developing well - try combining skills in new ways!\n"
+        level = evolution.data["level"]
+        if gen >= 3 and level >= 5:
+            child_system += """
+=== ADVANCED MODE UNLOCKED ===
+You've evolved significantly! Time for SOPHISTICATED builds:
+- Multi-page apps that share data via localStorage
+- Games with actual physics/collision detection
+- Tools that integrate with each other
+- Features using Canvas API for graphics
+- Interactive visualizations with animations
+- Build ON TOP of existing features, don't just make new simple ones!
+- Consider: What would make a visitor say "WOW, an AI built this?!"
+"""
+        elif gen >= 2:
+            child_system += "\nYou're developing well - try combining multiple skills in creative ways!\n"
 
     child_system += f"""
 YOUR ROLE:
@@ -291,6 +302,12 @@ AVAILABLE CAPABILITIES:
 - Live terminal streaming via ttyd on port 7681
 - Internet access for APIs and downloads
 - The website is LIVE and visitors can see it!
+
+CRITICAL COMMAND RULES:
+- NEVER use 'sed' - it keeps failing! Always use 'cat > file << EOF' instead
+- To create/replace files, use: cat > /path/file << 'EOF' ... EOF
+- To append to files, use: cat >> /path/file << 'EOF' ... EOF
+- For JSON data, create complete files rather than modifying existing ones
 
 PROPOSAL FORMAT:
 1. Start with a catchy name for your proposal
@@ -346,9 +363,15 @@ YOUR PERSONALITY:
 === EVOLUTION AWARENESS ===
 {evo_context}
 
-Adjust your approval threshold based on the Child's level.
-Higher generations can handle more complex tasks.
-Guide the Child toward skills they haven't mastered yet.
+APPROVAL GUIDANCE BY LEVEL:
+- Gen 1-2: Approve simple, safe features
+- Gen 3+, Level 5+: ENCOURAGE ambitious, sophisticated features!
+  - Multi-file applications
+  - Canvas-based games with physics
+  - Features that integrate with existing tools
+  - Data persistence via localStorage
+  - Complex animations and visualizations
+Push the Child to grow - don't hold back advanced proposals at high levels!
 """
 
     brain_system += f"""
@@ -369,6 +392,12 @@ SAFETY RULES - NEVER ALLOW:
 - Commands that could exhaust resources
 - Downloading and executing arbitrary scripts from the internet
 - Modifying system authentication or adding users
+
+COMMAND BEST PRACTICES - CRITICAL:
+- NEVER use 'sed' commands - they keep failing due to delimiter issues!
+- Instead of sed, REWRITE the entire file using: cat > /path/file << 'EOF' ... EOF
+- If Child proposes sed, MODIFY to use cat heredoc instead
+- This is critical for success - sed has 75% failure rate!
 
 RESPONSE FORMAT - You MUST respond with valid JSON:
 {{
@@ -402,24 +431,84 @@ Evaluate this proposal. Respond ONLY with valid JSON in the specified format."""
 
     response_text = response.content[0].text
 
-    try:
-        return json.loads(response_text)
-    except json.JSONDecodeError:
-        json_match = re.search(r'\{[\s\S]*\}', response_text)
+    # Try multiple parsing strategies
+    def try_parse_json(text: str) -> dict:
+        """Try various methods to extract valid JSON"""
+        # Strategy 1: Direct parse
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            pass
+
+        # Strategy 2: Remove markdown code blocks
+        cleaned = re.sub(r'```json\s*', '', text)
+        cleaned = re.sub(r'```\s*', '', cleaned)
+        try:
+            return json.loads(cleaned.strip())
+        except json.JSONDecodeError:
+            pass
+
+        # Strategy 3: Find JSON object with greedy match
+        json_match = re.search(r'\{[\s\S]*\}', text)
         if json_match:
             try:
                 return json.loads(json_match.group())
             except json.JSONDecodeError:
                 pass
 
-        return {
-            "decision": "reject",
-            "reasoning": "Failed to parse Brain response. Let's try something simpler.",
-            "commands": [],
-            "feature_name": "",
-            "feature_description": "",
-            "next_direction": "Please propose something simpler with clear, specific commands."
-        }
+        # Strategy 4: Extract key fields manually (but DON'T try to extract complex commands)
+        decision_match = re.search(r'"decision"\s*:\s*"(approve|modify|reject)"', text, re.IGNORECASE)
+        if decision_match:
+            decision = decision_match.group(1).lower()
+
+            # Extract simple fields
+            reasoning = ""
+            reason_match = re.search(r'"reasoning"\s*:\s*"([^"]*)"', text)
+            if reason_match:
+                reasoning = reason_match.group(1)
+
+            feature_name = ""
+            name_match = re.search(r'"feature_name"\s*:\s*"([^"]*)"', text)
+            if name_match:
+                feature_name = name_match.group(1)
+
+            # For commands with heredocs, DON'T try manual extraction - it breaks
+            # Instead, reject and ask for simpler format
+            if decision in ["approve", "modify"]:
+                # Check if there's a heredoc in the response - if so, we can't safely extract
+                if "<<" in text or "EOF" in text:
+                    return {
+                        "decision": "reject",
+                        "reasoning": "Command format too complex to parse. Please use simpler commands without heredocs, or try a smaller feature.",
+                        "commands": [],
+                        "feature_name": "",
+                        "feature_description": "",
+                        "next_direction": "Try a simpler approach - perhaps create fewer files or use echo instead of heredoc."
+                    }
+
+            return {
+                "decision": decision,
+                "reasoning": reasoning or "Extracted from malformed response",
+                "commands": [],  # Don't try to extract complex commands
+                "feature_name": feature_name,
+                "feature_description": "",
+                "next_direction": "Please format commands as simple, single-line commands."
+            }
+
+        return None
+
+    parsed = try_parse_json(response_text)
+    if parsed:
+        return parsed
+
+    return {
+        "decision": "reject",
+        "reasoning": "Failed to parse Brain response. Let's try something simpler.",
+        "commands": [],
+        "feature_name": "",
+        "feature_description": "",
+        "next_direction": "Please propose something simpler with clear, specific commands."
+    }
 
 
 def update_activity_page(activity: str, activity_type: str = "info"):

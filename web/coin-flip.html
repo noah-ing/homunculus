@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Flipper - HOMUNCULUS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            min-height: 100vh;
+            color: white;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            margin: 40px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .coin {
+            font-size: 8rem;
+            margin: 40px 0;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+        }
+        .coin.spinning {
+            animation: flip 0.6s ease-in-out;
+        }
+        @keyframes flip {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(90deg); }
+            100% { transform: rotateY(180deg); }
+        }
+        button {
+            background: #8b4513;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin: 20px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #a0522d;
+            transform: translateY(-3px);
+        }
+        button:disabled {
+            background: #666;
+            transform: none;
+            cursor: not-allowed;
+        }
+        .result {
+            font-size: 2rem;
+            margin: 20px 0;
+            min-height: 60px;
+        }
+        .back-link {
+            color: white;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.1rem;
+        }
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 30px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back</a>
+    <h1>🪙 COIN FLIPPER</h1>
+    
+    <div class="coin" id="coin" onclick="flipCoin()">🪙</div>
+    <div class="result" id="result">Click the coin or button to flip!</div>
+    <button id="flipBtn" onclick="flipCoin()">FLIP COIN!</button>
+    
+    <div class="stats">
+        <div>Heads: <span id="headsCount">0</span> | Tails: <span id="tailsCount">0</span></div>
+        <div>Total Flips: <span id="totalFlips">0</span></div>
+    </div>
+
+    <script>
+        let headsCount = 0;
+        let tailsCount = 0;
+        let totalFlips = 0;
+        
+        function flipCoin() {
+            const coin = document.getElementById('coin');
+            const result = document.getElementById('result');
+            const flipBtn = document.getElementById('flipBtn');
+            
+            // Disable button during animation
+            flipBtn.disabled = true;
+            coin.style.cursor = 'not-allowed';
+            
+            // Add spinning animation
+            coin.classList.add('spinning');
+            result.textContent = 'Flipping...';
+            
+            setTimeout(() => {
+                // Determine result
+                const isHeads = Math.random() < 0.5;
+                
+                if (isHeads) {
+                    coin.textContent = '👑'; // Heads
+                    result.textContent = 'HEADS!';
+                    headsCount++;
+                } else {
+                    coin.textContent = '🟨'; // Tails  
+                    result.textContent = 'TAILS!';
+                    tailsCount++;
+                }
+                
+                totalFlips++;
+                updateStats();
+                
+                // Remove animation and re-enable
+                coin.classList.remove('spinning');
+                flipBtn.disabled = false;
+                coin.style.cursor = 'pointer';
+                
+            }, 600);
+        }
+        
+        function updateStats() {
+            document.getElementById('headsCount').textContent = headsCount;
+            document.getElementById('tailsCount').textContent = tailsCount;
+            document.getElementById('totalFlips').textContent = totalFlips;
+        }
+    </script>
+</body>
+</html>
